@@ -1,0 +1,13 @@
+.div-content {
+  display: none;
+  text-align: center;
+}
+.reg_button {
+  width: 50%;
+  margin: 8px 0;
+  padding: 12px 20px;
+  display: inline-block;
+  border: white;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}

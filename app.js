@@ -6,13 +6,46 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var users = {};
+
+
+function show_only_button(button_text){
+	$('.div-content').hide()
+	$('#'+button_text).show()
+}
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	Start();
+	$("#welcome").show();
+	setMaxDate();
+	StartGame();
+	users["k"] = {
+		password: "k"
+	}
 });
 
-function Start() {
+function setMaxDate(){
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	if(dd<10){
+			dd='0'+dd
+		} 
+		if(mm<10){
+			mm='0'+mm
+		} 
+
+	today = yyyy+'-'+mm+'-'+dd;
+	document.getElementById("datefield").setAttribute("max", today);
+}
+
+function register(){
+	let reg_form = $("#reg-form")
+	alert ("You entered: " + reg_form.value);
+}
+
+function StartGame() {
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
