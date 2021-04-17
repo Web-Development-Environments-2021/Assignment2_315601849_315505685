@@ -20,35 +20,35 @@
     </div>
     <div id="content">
       <div id="welcome" class="div-content">
-        <p>LOGO</p>
+        <br /><img class="photo" src="resources/images/logo.png" /><br />
         <button onclick="show_only_button('register')">Register</button>
         <button onclick="show_only_button('login')">Login</button>
       </div>
       <div id="register" class="div-content">
-        <form id="reg-form" onsubmit="return register()">
+        <form id="reg-form">
           <label for="username">Username : </label><br />
           <input
             class="reg_button"
             type="text"
+            id="username-reg"
             placeholder="Enter Username"
             name="username"
-            required
           />
           <br /><label for="password">Password : </label><br />
           <input
             class="reg_button"
             type="password"
+            id="pass-reg"
             placeholder="Enter Password"
             name="password"
-            required
           />
           <br /><label for="full-name">Full Name : </label><br />
           <input
             class="reg_button"
             type="text"
+            id="name-reg"
             placeholder="Enter Full Name"
             name="full-name"
-            required
           />
           <br /><label for="email">Email : </label><br />
           <input
@@ -56,7 +56,7 @@
             type="text"
             placeholder="Enter Email"
             name="email"
-            required
+            id="email-reg"
           />
           <br /><label for="datefield">Date Of Birth : </label><br />
           <input
@@ -68,7 +68,7 @@
             max="2021-04-28"
           />
           <br /><br />
-          <input type="submit" value="Submit" />
+          <button id="reg-submit" onclick="return register()">Submit</button>
           <input type="reset" value="Reset" />
         </form>
       </div>
