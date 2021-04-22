@@ -1,3 +1,7 @@
+body{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .div-content {
   display: none;
   text-align: center;
@@ -38,9 +42,6 @@ body {
   margin: auto;
 }
 
-label {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 .navbutton {
   background: transparent;
@@ -52,7 +53,7 @@ label {
   border-radius: 0.12em;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  
   font-weight: bold;
   color: #000000;
   text-align: center;

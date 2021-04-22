@@ -11,6 +11,7 @@ function login(){
     }
     else{
         welcomeUser(username);
+        $("#login-form").trigger("reset");
     }
     return false;
 }
