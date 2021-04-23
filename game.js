@@ -8,9 +8,9 @@ function CreateBoardGame() {
     var pacman_remain = 1;
     board = new Array();
 
-    for (var i = 0; i < board_hight; i++) {
+    for (var i = 0; i < board_width; i++) {
         board[i] = new Array();
-        for (var j = 0; j < board_width; j++) {
+        for (var j = 0; j < board_hight; j++) {
             //Set Obstacles
             if (
                 (i == 3 && j == 3) ||
@@ -76,8 +76,8 @@ function Draw() {
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
-    for (var i = 0; i < board_hight; i++) {
-        for (var j = 0; j < board_width; j++) {
+    for (var i = 0; i < board_width; i++) {
+        for (var j = 0; j < board_hight; j++) {
             let obj = board[i][j];
             if (obj != null) {
                 obj.drawMe();
