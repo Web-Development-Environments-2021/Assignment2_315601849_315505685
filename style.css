@@ -31,7 +31,7 @@ body {
   background: white;
   padding-bottom: 20px;
   padding-top: 20px;
-  width: 40%;
+  width: 70%;
   border-radius: 2rem;
   background: linear-gradient(
     to right bottom,
@@ -41,6 +41,8 @@ body {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   margin: auto;
 }
+
+
 
 
 .navbutton {

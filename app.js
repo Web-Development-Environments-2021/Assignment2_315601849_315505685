@@ -9,6 +9,9 @@ var interval;
 var users = { k: { password: "k" } };
 var logged_in_user = null;
 
+board_hight = 15;
+board_width = 12;
+
 function show_only_button(button_text) {
   $(".div-content").hide();
   $("#" + button_text).show();
@@ -22,19 +25,16 @@ $(document).ready(function () {
   StartGame();
 });
 
-
-function StartGame() {
-  board = new Array();
-  score = 0;
-  pac_color = "yellow";
-  var cnt = 100;
-  var food_remain = 50;
+function CreateBoardGame(){
+  var cnt = board_width*board_hight;
+  var food_remain = number_of_balls;
   var pacman_remain = 1;
-  start_time = new Date();
-  for (var i = 0; i < 10; i++) {
+  board = new Array();
+
+  for (var i = 0; i < board_hight; i++) {
     board[i] = new Array();
-    //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-    for (var j = 0; j < 10; j++) {
+    for (var j = 0; j < board_width; j++) {
+      //Set Obstacles
       if (
         (i == 3 && j == 3) ||
         (i == 3 && j == 4) ||
@@ -43,28 +43,51 @@ function StartGame() {
         (i == 6 && j == 2)
       ) {
         board[i][j] = 4;
-      } else {
+      } 
+
+      else {
         var randomNum = Math.random();
+        //Candy
         if (randomNum <= (1.0 * food_remain) / cnt) {
           food_remain--;
           board[i][j] = 1;
-        } else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+        } 
+        //Packman
+        else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
           shape.i = i;
           shape.j = j;
           pacman_remain--;
           board[i][j] = 2;
-        } else {
+        } 
+        //Empty Cell
+        else {
           board[i][j] = 0;
         }
         cnt--;
       }
     }
   }
+
   while (food_remain > 0) {
     var emptyCell = findRandomEmptyCell(board);
     board[emptyCell[0]][emptyCell[1]] = 1;
     food_remain--;
   }
+
+  return board;
+
+}
+
+
+function StartGame() {
+  
+  score = 0;
+  pac_color = "yellow";
+  start_time = new Date();
+
+  board = CreateBoardGame();
+
+  //Set handlers for keys
   keysDown = {};
   addEventListener(
     "keydown",
@@ -80,6 +103,8 @@ function StartGame() {
     },
     false
   );
+
+  //Start game
   interval = setInterval(UpdatePosition, 250);
 }
 
@@ -93,31 +118,19 @@ function findRandomEmptyCell(board) {
   return [i, j];
 }
 
-function GetKeyPressed() {
-  if (keysDown[38]) {
-    return 1;
-  }
-  if (keysDown[40]) {
-    return 2;
-  }
-  if (keysDown[37]) {
-    return 3;
-  }
-  if (keysDown[39]) {
-    return 4;
-  }
-}
 
 function Draw() {
   canvas.width = canvas.width; //clean board
   lblScore.value = score;
   lblTime.value = time_elapsed;
-  for (var i = 0; i < 10; i++) {
-    for (var j = 0; j < 10; j++) {
+  for (var i = 0; i < board_hight; i++) {
+    for (var j = 0; j < board_width; j++) {
       var center = new Object();
       center.x = i * 60 + 30;
       center.y = j * 60 + 30;
-      if (board[i][j] == 2) {
+
+      // Packman
+      if (board[i][j] == 2) { 
         context.beginPath();
         context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
         context.lineTo(center.x, center.y);
@@ -127,12 +140,18 @@ function Draw() {
         context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
         context.fillStyle = "black"; //color
         context.fill();
-      } else if (board[i][j] == 1) {
+      }
+      
+      //Candy
+      else if (board[i][j] == 1) {
         context.beginPath();
         context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
         context.fillStyle = "black"; //color
         context.fill();
-      } else if (board[i][j] == 4) {
+      } 
+      
+      //Wall
+      else if (board[i][j] == 4) { 
         context.beginPath();
         context.rect(center.x - 30, center.y - 30, 60, 60);
         context.fillStyle = "grey"; //color
@@ -142,26 +161,41 @@ function Draw() {
   }
 }
 
+function GetKeyPressed() {
+  if (keysDown[up_key]) {
+    return 'UP';
+  }
+  if (keysDown[down_key]) {
+    return 'DOWN';
+  }
+  if (keysDown[left_key]) {
+    return 'LEFT';
+  }
+  if (keysDown[right_key]) {
+    return 'RIGHT';
+  }
+}
+
 function UpdatePosition() {
   board[shape.i][shape.j] = 0;
-  var x = GetKeyPressed();
-  if (x == 1) {
+  var key = GetKeyPressed();
+  if (key == 'UP') {
     if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
       shape.j--;
     }
   }
-  if (x == 2) {
-    if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+  if (key == 'DOWN') {
+    if (shape.j < board_hight-1 && board[shape.i][shape.j + 1] != 4) {
       shape.j++;
     }
   }
-  if (x == 3) {
+  if (key == 'LEFT') {
     if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
       shape.i--;
     }
   }
-  if (x == 4) {
-    if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+  if (key == 'RIGHT') {
+    if (shape.i < board_width-1 && board[shape.i + 1][shape.j] != 4) {
       shape.i++;
     }
   }
