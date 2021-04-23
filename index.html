@@ -10,6 +10,7 @@
     <script type="text/javascript" src="./pacman.js"></script>
     <script type="text/javascript" src="./candy.js"></script>
     <script type="text/javascript" src="./wall.js"></script>
+    <script type="text/javascript" src="./about.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -269,7 +270,7 @@
           </div>
           <br />
           <br />
-          <button id="prop-submit" onclick="return rand_details()">
+          <button id="prop-random" onclick="return rand_details()">
             Random
           </button>
           <button id="prop-submit" onclick="return save_details()">Save</button>
@@ -278,7 +279,10 @@
       </div>
 
       <dialog id="about">
-        <label>Hello</label>
+        <div class="div-content">
+          <label>Hello</label>
+          <button onclick="close_about()">Close dialog</button>
+        </div>
       </dialog>
       <div id="all_game" class="div-content">
         <div id="score">
