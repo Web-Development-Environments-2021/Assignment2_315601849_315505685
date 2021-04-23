@@ -4,6 +4,7 @@ let candies_count = 0;
 
 function CreateBoardGame() {
     var cnt = board_width * board_hight;
+    let wall_remain = 20;
     var food_remain = number_of_balls;
     var pacman_remain = 1;
     board = new Array();
@@ -11,38 +12,32 @@ function CreateBoardGame() {
     for (var i = 0; i < board_width; i++) {
         board[i] = new Array();
         for (var j = 0; j < board_hight; j++) {
+            var randomNum = Math.random();
+            //Candy
+            if (randomNum <= (1.0 * food_remain) / cnt) {
+                let points = 15;
+                food_remain--;
+                board[i][j] = new Candy(i, j, points);
+                candies_count++;
+            }
+            //Pacman
+            else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+                pacman_obj = new Pacman(i, j);
+                pacman_remain--;
+                board[i][j] = pacman_obj;
+            }
             //Set Obstacles
-            if (
-                (i == 3 && j == 3) ||
-                (i == 3 && j == 4) ||
-                (i == 3 && j == 5) ||
-                (i == 6 && j == 1) ||
-                (i == 6 && j == 2)
-            ) {
+            else if (randomNum <= (1.0 * (wall_remain + pacman_remain + food_remain)) / cnt){
+                wall_remain--;
                 board[i][j] = new Wall(i, j);
             }
-
+            //Empty Cell
             else {
-                var randomNum = Math.random();
-                //Candy
-                if (randomNum <= (1.0 * food_remain) / cnt) {
-                    let points = 15;
-                    food_remain--;
-                    board[i][j] = new Candy(i, j, points);
-                    candies_count++;
-                }
-                //Pacman
-                else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-                    pacman_obj = new Pacman(i, j);
-                    pacman_remain--;
-                    board[i][j] = pacman_obj;
-                }
-                //Empty Cell
-                else {
-                    board[i][j] = null;
-                }
-                cnt--;
+                board[i][j] = null;
             }
+            
+            cnt--;
+            
         }
     }
 
