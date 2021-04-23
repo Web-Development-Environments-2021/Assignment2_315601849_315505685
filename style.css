@@ -1,11 +1,24 @@
-body{
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .div-content {
   display: none;
   text-align: center;
 }
+
+.prop_button {
+  width: 35%;
+  height: 20px;
+  margin: 8px 0;
+  padding: 12px 20px;
+  display: inline-block;
+  border: white;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
 .reg_button {
   width: 70%;
   margin: 8px 0;
@@ -27,6 +40,26 @@ body {
   text-align: center;
 }
 
+.rec-buttons {
+  background: transparent;
+  margin-top: 20px;
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #000000;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  transition: all 0.2s;
+}
+.rec-buttons:hover {
+  color: #ffffff;
+  background-color: #000000;
+  border: 0.1em solid #000000;
+}
+
 .div-content {
   background: white;
   padding-bottom: 20px;
@@ -41,9 +74,20 @@ body {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   margin: auto;
 }
-
-
-
+#properties-rec {
+  background: rgb(255, 255, 255);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 70%;
+  border-radius: 2rem;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.4)
+  );
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
 
 .navbutton {
   background: transparent;
@@ -55,7 +99,7 @@ body {
   border-radius: 0.12em;
   box-sizing: border-box;
   text-decoration: none;
-  
+
   font-weight: bold;
   color: #000000;
   text-align: center;

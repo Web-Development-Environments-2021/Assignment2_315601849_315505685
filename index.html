@@ -151,7 +151,100 @@
           <input type="reset" value="Reset" />
         </form>
       </div>
-      <div id="properties" class="div-content">Properties Div</div>
+
+      <div id="properties" class="div-content">
+        <form id="prop-form">
+          <div id="properties-rec">
+            <label for="buttons"><b>Record Buttons : </b></label>
+            <section>
+              <button class="rec-buttons" onclick="return false">Left</button>
+              <button class="rec-buttons" onclick="return false">Up</button>
+              <button class="rec-buttons" onclick="return false">Right</button>
+              <button class="rec-buttons" onclick="return false">Down</button>
+            </section>
+          </div>
+
+          <div id="properties-rec" style="margin-top: 20px">
+            <label for="buttons"><b>Enter Details : </b></label>
+            <br />
+            <br />
+            <section>
+              <label>Enter number of balls:</label>
+              <input
+                id="prop-num-balls"
+                class="prop_button"
+                type="num_balls"
+                placeholder="Number Of Balls"
+                name="num_balls"
+              />
+              <br />
+              <label>Enter number of monsters:</label>
+              <input
+                id="prop-num-monsters"
+                class="prop_button"
+                type="num_monsters"
+                placeholder="Number Of Monsters"
+                name="num_monsters"
+              />
+              <br />
+              <label>Enter time for game:</label>
+              <input
+                id="prop-time"
+                class="prop_button"
+                type="prop-time"
+                placeholder="Number Of Seconds"
+                name="prop-time"
+              />
+            </section>
+          </div>
+          <div id="properties-rec" style="margin-top: 20px">
+            <label for="buttons"><b>Balls Color : </b></label>
+            <br />
+            <br />
+            <div style="display: flex">
+              <div style="width: 25%">
+                <label>5 Points Ball</label>
+                <br />
+                <input
+                  type="color"
+                  id="html5colorpicker"
+                  onchange="clickColor(0, -1, -1, 5)"
+                  value="#ff0000"
+                  style="width: 50%"
+                />
+              </div>
+
+              <div style="width: 25%">
+                <label>15 Points Ball</label>
+                <br />
+                <input
+                  type="color"
+                  id="html5colorpicker"
+                  onchange="clickColor(0, -1, -1, 5)"
+                  value="#ff0000"
+                  style="width: 50%"
+                />
+              </div>
+              <div style="width: 25%">
+                <label>25 Points Ball</label>
+                <br />
+                <input
+                  type="color"
+                  id="html5colorpicker"
+                  onchange="clickColor(0, -1, -1, 5)"
+                  value="#ff0000"
+                  style="width: 50%"
+                />
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <button id="reg-submit" onclick="return new_func()">Save</button>
+          <input type="reset" value="Reset" />
+        </form>
+      </div>
+
       <div id="about" class="div-content">About Div</div>
       <div id="all_game" class="div-content">
         <div id="score">
@@ -163,7 +256,7 @@
           <input id="lblTime" type="text" />
         </div>
         <div id="game">
-          <canvas id="canvas" height="900" width="720"></canvas>
+          <canvas id="canvas" height="600" width="600"></canvas>
         </div>
       </div>
     </div>
