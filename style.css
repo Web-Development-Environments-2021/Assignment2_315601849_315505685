@@ -19,6 +19,9 @@ body {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 103px;
 }
 
 .modal {
@@ -100,13 +103,25 @@ body {
   background: white;
   padding-bottom: 20px;
   padding-top: 20px;
-  width: 800px;
+  width: 40%;
   border-radius: 2rem;
   background: linear-gradient(
     to right bottom,
     rgba(255, 255, 255, 0.7),
     rgba(255, 255, 255, 0.4)
   );
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
+
+.div-about {
+  margin-top: auto;
+  background: white;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  width: 45%;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   margin: auto;
 }
