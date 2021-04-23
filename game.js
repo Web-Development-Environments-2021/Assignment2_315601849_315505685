@@ -35,7 +35,7 @@ function CreateBoardGame() {
             else {
                 board[i][j] = null;
             }
-            
+
             cnt--;
             
         }
@@ -133,7 +133,7 @@ function UpdatePosition() {
 
     if (key == 'RIGHT') {
         if (cur_x < board_width - 1) {
-            let next_obj = board[cur_x -1][cur_y];
+            let next_obj = board[cur_x +1][cur_y];
             if (next_obj == null || next_obj.constructor.name != "Wall") {
                 pacman_obj.x++;
             }
