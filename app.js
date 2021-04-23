@@ -2,7 +2,7 @@ var context;
 var shape = new Object();
 var board;
 var score;
-var pac_color;
+var pac_color = "yellow";
 var start_time;
 var time_elapsed;
 var interval;
@@ -38,7 +38,7 @@ function StartGame() {
   life = 5;
   
   score = 0;
-  pac_color = "yellow";
+ // pac_color = "yellow";
   start_time = new Date();
 
   board = CreateBoardGame();

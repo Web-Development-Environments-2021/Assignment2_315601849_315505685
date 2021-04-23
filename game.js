@@ -1,162 +1,173 @@
 let pacman_obj;
+let candies_array = new Array();
+let candies_count = 0;
 
-function CreateBoardGame(){
-    var cnt = board_width*board_hight;
+function CreateBoardGame() {
+    var cnt = board_width * board_hight;
     var food_remain = number_of_balls;
     var pacman_remain = 1;
     board = new Array();
-  
+
     for (var i = 0; i < board_hight; i++) {
-      board[i] = new Array();
-      for (var j = 0; j < board_width; j++) {
-        //Set Obstacles
-        if (
-          (i == 3 && j == 3) ||
-          (i == 3 && j == 4) ||
-          (i == 3 && j == 5) ||
-          (i == 6 && j == 1) ||
-          (i == 6 && j == 2)
-        ) {
-          board[i][j] = 4;
-        } 
-  
-        else {
-          var randomNum = Math.random();
-          //Candy
-          if (randomNum <= (1.0 * food_remain) / cnt) {
-            food_remain--;
-            board[i][j] = 1;
-          } 
-          //Pacman
-          else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-            pacman_obj = new Pacman(i,j);
-            pacman_remain--;
-            board[i][j] = 2;
-          } 
-          //Empty Cell
-          else {
-            board[i][j] = 0;
-          }
-          cnt--;
+        board[i] = new Array();
+        for (var j = 0; j < board_width; j++) {
+            //Set Obstacles
+            if (
+                (i == 3 && j == 3) ||
+                (i == 3 && j == 4) ||
+                (i == 3 && j == 5) ||
+                (i == 6 && j == 1) ||
+                (i == 6 && j == 2)
+            ) {
+                board[i][j] = new Wall(i, j);
+            }
+
+            else {
+                var randomNum = Math.random();
+                //Candy
+                if (randomNum <= (1.0 * food_remain) / cnt) {
+                    let points = 15;
+                    food_remain--;
+                    board[i][j] = new Candy(i, j, points);
+                    candies_count++;
+                }
+                //Pacman
+                else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+                    pacman_obj = new Pacman(i, j);
+                    pacman_remain--;
+                    board[i][j] = pacman_obj;
+                }
+                //Empty Cell
+                else {
+                    board[i][j] = null;
+                }
+                cnt--;
+            }
         }
-      }
     }
-  
+
     while (food_remain > 0) {
-      var emptyCell = findRandomEmptyCell(board);
-      board[emptyCell[0]][emptyCell[1]] = 1;
-      food_remain--;
+        var emptyCell = findRandomEmptyCell(board);
+        let i = emptyCell[0];
+        let j = emptyCell[1];
+        let points = 15;
+        board[i][j] = new Candy(i, j, points);
+        food_remain--;
+        //candies_array[candies_count] = new Candy(emptyCell[0],emptyCell[1], points);
+        candies_count++;
     }
-  
+
     return board;
-  }
+}
 
 
 function findRandomEmptyCell(board) {
     var i = Math.floor(Math.random() * 9 + 1);
     var j = Math.floor(Math.random() * 9 + 1);
-    while (board[i][j] != 0) {
-      i = Math.floor(Math.random() * 9 + 1);
-      j = Math.floor(Math.random() * 9 + 1);
+    while (board[i][j] != null) {
+        i = Math.floor(Math.random() * 9 + 1);
+        j = Math.floor(Math.random() * 9 + 1);
     }
     return [i, j];
-  }
-  
-  
-  function Draw() {
+}
+
+
+function Draw() {
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
     for (var i = 0; i < board_hight; i++) {
-      for (var j = 0; j < board_width; j++) {
-        var center = new Object();
-        center.x = i * 60 + 30;
-        center.y = j * 60 + 30;
-  
-        // Pacman
-        if (board[i][j] == 2) { 
-            pacman_obj.drawMe()
+        for (var j = 0; j < board_width; j++) {
+            let obj = board[i][j];
+            if (obj != null) {
+                obj.drawMe();
+            }
         }
-        
-        //Candy
-        else if (board[i][j] == 1) {
-          context.beginPath();
-          context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-          context.fillStyle = "black"; //color
-          context.fill();
-        } 
-        
-        //Wall
-        else if (board[i][j] == 4) { 
-          context.beginPath();
-          context.rect(center.x - 30, center.y - 30, 60, 60);
-          context.fillStyle = "grey"; //color
-          context.fill();
-        }
-      }
     }
-  }
-  
-  function GetKeyPressed() {
+
+}
+
+function GetKeyPressed() {
     if (keysDown[up_key]) {
-      return 'UP';
+        return 'UP';
     }
     if (keysDown[down_key]) {
-      return 'DOWN';
+        return 'DOWN';
     }
     if (keysDown[left_key]) {
-      return 'LEFT';
+        return 'LEFT';
     }
     if (keysDown[right_key]) {
-      return 'RIGHT';
+        return 'RIGHT';
     }
-  }
-  
-  function UpdatePosition() {
+}
+
+function UpdatePosition() {
+    let cur_x = pacman_obj.x;
+    let cur_y = pacman_obj.y;
     //clean pacman position
-    board[pacman_obj.x][pacman_obj.y] = 0;
+    board[cur_x][cur_y] = null;
 
     let key = GetKeyPressed();
     if (key == 'UP') {
-        if (pacman_obj.y > 0 && board[pacman_obj.x][pacman_obj.y - 1] != 4) {
-        pacman_obj.y--;
-      }
+        if (cur_y > 0) {
+            let next_obj = board[cur_x][cur_y - 1];
+            if (next_obj == null || next_obj.constructor.name != "Wall") {
+                pacman_obj.y--;
+            }
+        }
     }
+
     if (key == 'DOWN') {
-        if (pacman_obj.y < board_hight-1 && board[pacman_obj.x][pacman_obj.y + 1] != 4) {
-        pacman_obj.y++;
-      }
+        if (cur_y < board_hight - 1) {
+            let next_obj = board[cur_x][cur_y + 1];
+            if (next_obj == null || next_obj.constructor.name != "Wall") {
+                pacman_obj.y++;
+            }
+        }
     }
+
     if (key == 'LEFT') {
-        if (pacman_obj.x > 0 && board[pacman_obj.x -1][pacman_obj.y] != 4) {
-        pacman_obj.x--;
-      }
+        if (cur_x > 0) {
+            let next_obj = board[cur_x -1][cur_y];
+            if (next_obj == null || next_obj.constructor.name != "Wall") {
+                pacman_obj.x--;
+            }
+        }
     }
+
     if (key == 'RIGHT') {
-        if (pacman_obj.x < board_width-1 && board[pacman_obj.x +1][pacman_obj.y] != 4) {
-        pacman_obj.x++;
-      }
+        if (cur_x < board_width - 1) {
+            let next_obj = board[cur_x -1][cur_y];
+            if (next_obj == null || next_obj.constructor.name != "Wall") {
+                pacman_obj.x++;
+            }
+        }
+
     }
-    if (board[pacman_obj.x][pacman_obj.y] == 1) {
-      score++;
+
+    let cur_obj = board[pacman_obj.x][pacman_obj.y];
+    if (cur_obj != null && cur_obj.constructor.name == "Candy") {
+        score++;
+
     }
 
     //Place Packman in new position in array
-    board[pacman_obj.x][pacman_obj.y] = 2;
-  
+    board[pacman_obj.x][pacman_obj.y] = pacman_obj;
+
     var currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
     if (score >= 20 && time_elapsed <= 10) {
-      pac_color = "green";
+        pac_color = "green";
     }
     if (score == 50) {
-      window.clearInterval(interval);
-      window.alert("Game completed");
+        window.clearInterval(interval);
+        window.alert("Game completed");
     } else {
-      Draw();
+        Draw();
     }
-  }
-  
+}
+
 
 
 
