@@ -1,104 +1,172 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <script src="./jquery-3.4.1.slim.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="./login.js"></script>
+    <script type="text/javascript" src="./register.js"></script>
+    <script type="text/javascript" src="./properties.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <script src="./jquery-3.4.1.slim.min.js"></script>
-  <script type="text/javascript" src="./app.js"></script>
-  <script type="text/javascript" src="./login.js"></script>
-  <script type="text/javascript" src="./register.js"></script>
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <div id="header"></div>
-  <div id="menu" style="text-align: center">
-    <span id="nav-bar">
-      <button onclick="show_only_button('welcome')" class="navbutton bouncy" style="animation-delay: 0.07s">
-        Welcome
-      </button>
-      <button onclick="show_only_button('register')" class="navbutton bouncy" style="animation-delay: 0.14s">
-        Register
-      </button>
-      <button onclick="show_only_button('login')" class="navbutton bouncy" style="animation-delay: 0.21s">
-        Login
-      </button>
-      <button onclick="show_only_button('properties')" class="navbutton bouncy" style="animation-delay: 0.28s">
-        Properties
-      </button>
-      <button onclick="show_only_button('about')" class="navbutton bouncy" style="animation-delay: 0.35s">
-        About
-      </button>
-      <button onclick="show_only_button('all_game')" class="navbutton bouncy" style="animation-delay: 0.42s">
-        Game
-      </button>
-    </span>
-  </div>
-  <div id="content">
-    <div id="welcome" class="div-content">
-      <br /><img class="photo" src="resources/images/logo.png" /><br />
-      <p id="welcome-greeting">
-        Welcome User!
-      </p>
-      <button class="welcome-button" onclick="show_only_button('register')">Register</button>
-      <button class="welcome-button" onclick="show_only_button('login')">Login</button>
+  <body>
+    <div id="header"></div>
+    <div id="menu" style="text-align: center">
+      <span id="nav-bar">
+        <button
+          onclick="show_only_button('welcome')"
+          class="navbutton bouncy"
+          style="animation-delay: 0.07s"
+        >
+          Welcome
+        </button>
+        <button
+          onclick="show_only_button('register')"
+          class="navbutton bouncy"
+          style="animation-delay: 0.14s"
+        >
+          Register
+        </button>
+        <button
+          onclick="show_only_button('login')"
+          class="navbutton bouncy"
+          style="animation-delay: 0.21s"
+        >
+          Login
+        </button>
+        <button
+          onclick="show_only_button('properties')"
+          class="navbutton bouncy"
+          style="animation-delay: 0.28s"
+        >
+          Properties
+        </button>
+        <button
+          onclick="show_only_button('about')"
+          class="navbutton bouncy"
+          style="animation-delay: 0.35s"
+        >
+          About
+        </button>
+        <button
+          onclick="show_only_button('all_game')"
+          class="navbutton bouncy"
+          style="animation-delay: 0.42s"
+        >
+          Game
+        </button>
+      </span>
     </div>
-    <div id="register" class="div-content">
-      <form id="reg-form">
-        <label for="username">Username : </label>
-        <br/>
-        <input class="reg_button" type="text" id="username-reg" placeholder="Enter Username" name="username" />
-        <br />
-        <label for="password">Password : </label>
-        <br/>
-        <input class="reg_button" type="password" id="pass-reg" placeholder="Enter Password" name="password" />
-        <br />
-        <label for="full-name">Full Name : </label>
-        <br/>
-        <input class="reg_button" type="text" id="name-reg" placeholder="Enter Full Name" name="full-name" />
-        <br />
-        <label for="email">Email : </label>
-        <br/>
-        <input class="reg_button" type="text" placeholder="Enter Email" name="email" id="email-reg" />
-        <br/>
-        <label for="datefield">Date Of Birth : </label>
-        <br/>
-        <input type="date" class="reg_button" id="datefield" name="birthday" min="1900-01-01" max="2021-04-28" />
-        <br/>
-        <br/>
-        <button id="reg-submit" onclick="return register()">Submit</button>
-        <input type="reset" value="Reset" />
-      </form>
-    </div>
-    <div id="login" class="div-content">
-      <form id="login-form">
-        <label for="username">Username : </label><br />
-        <input id="login-username" class="reg_button" type="text" placeholder="Enter Username" name="username"
-          required />
-        <br /><label for="password">Password : </label><br />
-        <input id="login-password" class="reg_button" type="password" placeholder="Enter Password" name="password"
-          required />
-        <br /><br />
-        <button id="login-submit" onclick="return login()">Login</button>
-        <input type="reset" value="Reset" />
-      </form>
-    </div>
-    <div id="properties" class="div-content">Properties Div</div>
-    <div id="about" class="div-content">About Div</div>
-    <div id="all_game" class="div-content">
-      <div id="score">
-        <label for="lblScore">SCORE:</label>
-        <input id="lblScore" type="text" />
+    <div id="content">
+      <div id="welcome" class="div-content">
+        <br /><img class="photo" src="resources/images/logo.png" /><br />
+        <p id="welcome-greeting">Welcome User!</p>
+        <button class="welcome-button" onclick="show_only_button('register')">
+          Register
+        </button>
+        <button class="welcome-button" onclick="show_only_button('login')">
+          Login
+        </button>
       </div>
-      <div id="time">
-        <label for="lblTime">TIME:</label>
-        <input id="lblTime" type="text" />
+      <div id="register" class="div-content">
+        <form id="reg-form">
+          <label for="username">Username : </label>
+          <br />
+          <input
+            class="reg_button"
+            type="text"
+            id="username-reg"
+            placeholder="Enter Username"
+            name="username"
+          />
+          <br />
+          <label for="password">Password : </label>
+          <br />
+          <input
+            class="reg_button"
+            type="password"
+            id="pass-reg"
+            placeholder="Enter Password"
+            name="password"
+          />
+          <br />
+          <label for="full-name">Full Name : </label>
+          <br />
+          <input
+            class="reg_button"
+            type="text"
+            id="name-reg"
+            placeholder="Enter Full Name"
+            name="full-name"
+          />
+          <br />
+          <label for="email">Email : </label>
+          <br />
+          <input
+            class="reg_button"
+            type="text"
+            placeholder="Enter Email"
+            name="email"
+            id="email-reg"
+          />
+          <br />
+          <label for="datefield">Date Of Birth : </label>
+          <br />
+          <input
+            type="date"
+            class="reg_button"
+            id="datefield"
+            name="birthday"
+            min="1900-01-01"
+            max="2021-04-28"
+          />
+          <br />
+          <br />
+          <button id="reg-submit" onclick="return register()">Submit</button>
+          <input type="reset" value="Reset" />
+        </form>
       </div>
-      <div id="game">
-        <canvas id="canvas" height="600" width="600"></canvas>
+      <div id="login" class="div-content">
+        <form id="login-form">
+          <label for="username">Username : </label><br />
+          <input
+            id="login-username"
+            class="reg_button"
+            type="text"
+            placeholder="Enter Username"
+            name="username"
+            required
+          />
+          <br /><label for="password">Password : </label><br />
+          <input
+            id="login-password"
+            class="reg_button"
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            required
+          />
+          <br /><br />
+          <button id="login-submit" onclick="return login()">Login</button>
+          <input type="reset" value="Reset" />
+        </form>
+      </div>
+      <div id="properties" class="div-content">Properties Div</div>
+      <div id="about" class="div-content">About Div</div>
+      <div id="all_game" class="div-content">
+        <div id="score">
+          <label for="lblScore">SCORE:</label>
+          <input id="lblScore" type="text" />
+        </div>
+        <div id="time">
+          <label for="lblTime">TIME:</label>
+          <input id="lblTime" type="text" />
+        </div>
+        <div id="game">
+          <canvas id="canvas" height="600" width="600"></canvas>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="footer"></div>
-</body>
-
+    <div id="footer"></div>
+  </body>
 </html>
