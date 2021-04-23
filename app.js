@@ -9,8 +9,8 @@ var interval;
 var users = { k: { password: "k" } };
 var logged_in_user = null;
 
-board_hight = 15;
-board_width = 12;
+board_hight = 12;
+board_width = 17;
 cell_size = 20;
 
 function show_only_button(button_text) {
