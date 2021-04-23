@@ -29,12 +29,13 @@ function set_default_properties() {
 }
 
 function show_rec_dialog() {
-  $("#rec-dialog").show();
+  $(".modal").show();
+  //$(".modal").hide();
   return false;
 }
 
 function hide_rec_dialog() {
-  $("#rec-dialog").hide();
+  $(".modal").hide();
   return false;
 }
 

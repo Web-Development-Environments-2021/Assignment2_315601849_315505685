@@ -8,6 +8,7 @@
     <script type="text/javascript" src="./properties.js"></script>
     <script type="text/javascript" src="./game.js"></script>
     <script type="text/javascript" src="./pacman.js"></script>
+    <script type="text/javascript" src="./candy.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -172,9 +173,11 @@
                 Down
               </button>
             </section>
-            <dialog id="rec-dialog" open>
-              <label>Enter Any Key To Record</label>
-            </dialog>
+            <div id="myModal" class="modal">
+              <div class="modal-content" style="width: 30%">
+                <p>Enter Any Key To Save</p>
+              </div>
+            </div>
           </div>
 
           <div id="properties-rec" style="margin-top: 20px">
