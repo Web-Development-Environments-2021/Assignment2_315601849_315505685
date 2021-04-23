@@ -157,8 +157,9 @@ function UpdatePosition() {
 
     var currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
-    if (score >= 20 && time_elapsed <= 10) {
-        pac_color = "green";
+    //
+    if (score >= 100 && time_elapsed <= 10) {
+        pac_color = "#D17A22";
     }
     if (score == 50) {
         window.clearInterval(interval);
