@@ -148,7 +148,7 @@ function UpdatePosition() {
 
     let cur_obj = board[pacman_obj.x][pacman_obj.y];
     if (cur_obj != null && cur_obj.constructor.name == "Candy") {
-        score++;
+        score += cur_obj.points;
 
     }
 
