@@ -27,3 +27,17 @@ function set_default_properties() {
   game_time = 60;
   num_of_monsters = 4;
 }
+
+function show_rec_dialog() {
+  $("#rec-dialog").show();
+  return false;
+}
+
+function hide_rec_dialog() {
+  $("#rec-dialog").hide();
+  return false;
+}
+
+$(document).ready(function () {
+  hide_rec_dialog();
+});
