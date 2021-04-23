@@ -22,6 +22,7 @@ $(document).ready(function () {
   $("#welcome").show();
   $("#welcome-greeting").hide();
   setMaxDate();
+  set_default_properties()
   StartGame();
 });
 
@@ -202,7 +203,9 @@ function UpdatePosition() {
   if (board[shape.i][shape.j] == 1) {
     score++;
   }
+  //Place Packman
   board[shape.i][shape.j] = 2;
+
   var currentTime = new Date();
   time_elapsed = (currentTime - start_time) / 1000;
   if (score >= 20 && time_elapsed <= 10) {

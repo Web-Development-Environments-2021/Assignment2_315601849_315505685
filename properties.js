@@ -13,17 +13,17 @@ let game_time;
 let num_of_monsters;
 
 function set_default_properties() {
-  let left_key = 37;
-  let right_key = 39;
-  let up_key = 38;
-  let down_key = 40;
-  let number_of_balls = 50;
-  let percentage_5_balls = 0.6;
-  let color_5_balls = "red";
-  let percentage_15_balls = 0.3;
-  let color_15_balls = "blue";
-  let percentage_25_balls = 0.1;
-  let color_25_balls = "white";
-  let game_time = 60;
-  let num_of_monsters = 4;
+  left_key = 37;
+  right_key = 39;
+  up_key = 38;
+  down_key = 40;
+  number_of_balls = 50;
+  percentage_5_balls = 0.6;
+  color_5_balls = "red";
+  percentage_15_balls = 0.3;
+  color_15_balls = "blue";
+  percentage_25_balls = 0.1;
+  color_25_balls = "white";
+  game_time = 60;
+  num_of_monsters = 4;
 }
