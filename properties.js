@@ -91,6 +91,9 @@ function save_details() {
     number_of_balls = num_balls;
     num_of_monsters = num_monsters;
     game_time = time_amount;
+    color_5_balls = document.getElementById("color_ball_5").value;
+    color_15_balls = document.getElementById("color_ball_15").value;
+    color_25_balls = document.getElementById("color_ball_25").value;
   } else {
     alert(error);
   }
