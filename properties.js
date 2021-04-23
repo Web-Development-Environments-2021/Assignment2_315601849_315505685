@@ -59,6 +59,25 @@ function waitingKeypress(key) {
   });
 }
 
+function rand_details() {
+  $("#prop-num-balls").val(Math.floor(Math.random() * (90 - 50 + 1) + 50));
+  $("#prop-num-monsters").val(Math.floor(Math.random() * (4 - 1 + 1) + 1));
+  $("#prop-time").val(Math.floor(Math.random() * (120 - 60 + 1) + 60));
+  $("#color_ball_5").val(getRandomColor);
+  $("#color_ball_15").val(getRandomColor);
+  $("#color_ball_25").val(getRandomColor);
+  return false;
+}
+
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 function save_details() {
   let valid = true;
   let error = "";
@@ -94,6 +113,7 @@ function save_details() {
     color_5_balls = document.getElementById("color_ball_5").value;
     color_15_balls = document.getElementById("color_ball_15").value;
     color_25_balls = document.getElementById("color_ball_25").value;
+    alert("Saved Properties");
   } else {
     alert(error);
   }
