@@ -20,11 +20,11 @@ function set_default_properties() {
   down_key = 40;
   number_of_balls = 50;
   percentage_5_balls = 0.6;
-  color_5_balls = "red";
+  color_5_balls = "#5F0F40";
   percentage_15_balls = 0.3;
-  color_15_balls = "blue";
+  color_15_balls = "#9A031E";
   percentage_25_balls = 0.1;
-  color_25_balls = "white";
+  color_25_balls = "#0F4C5C";
   game_time = 60;
   num_of_monsters = 4;
 }
