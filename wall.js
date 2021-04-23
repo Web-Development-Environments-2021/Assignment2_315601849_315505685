@@ -6,11 +6,11 @@ class Wall {
 
     drawMe() {
         let center = new Object();
-        center.x = this.x * 60 + 30;
-        center.y = this.y * 60 + 30;
+        center.x = this.x * cell_size * 2 + cell_size;
+        center.y = this.y * cell_size * 2 + cell_size;
 
         context.beginPath();
-        context.rect(center.x - 30, center.y - 30, 60, 60);
+        context.rect(center.x - cell_size, center.y - cell_size, cell_size * 2, cell_size * 2);
         context.fillStyle = "grey"; //color
         context.fill();
     }
