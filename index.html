@@ -9,6 +9,7 @@
     <script type="text/javascript" src="./game.js"></script>
     <script type="text/javascript" src="./pacman.js"></script>
     <script type="text/javascript" src="./candy.js"></script>
+    <script type="text/javascript" src="./wall.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -235,6 +236,7 @@
                 <br />
                 <input
                   type="color"
+                  id="color_ball_5"
                   onchange="clickColor(0, -1, -1, 5)"
                   value="#5F0F40"
                   style="width: 20%"
@@ -246,6 +248,7 @@
                 <br />
                 <input
                   type="color"
+                  id="color_ball_15"
                   onchange="clickColor(0, -1, -1, 5)"
                   value="#9A031E"
                   style="width: 20%"
@@ -256,6 +259,7 @@
                 <br />
                 <input
                   type="color"
+                  id="color_ball_25"
                   onchange="clickColor(0, -1, -1, 5)"
                   value="#0F4C5C"
                   style="width: 20%"
@@ -265,7 +269,7 @@
           </div>
           <br />
           <br />
-          <button id="prop-submit" onclick="return new_func()">Save</button>
+          <button id="prop-submit" onclick="return save_details()">Save</button>
           <input type="reset" value="Reset" />
         </form>
       </div>

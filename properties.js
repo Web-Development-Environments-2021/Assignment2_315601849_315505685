@@ -35,13 +35,8 @@ async function show_rec_dialog(key) {
   await waitingKeypress(key);
 }
 
-function hide_rec_dialog() {
-  $(".modal").hide();
-  return false;
-}
-
 $(document).ready(function () {
-  hide_rec_dialog();
+  $(".modal").hide();
 });
 
 function waitingKeypress(key) {
@@ -62,4 +57,42 @@ function waitingKeypress(key) {
       $(".modal").hide();
     }
   });
+}
+
+function save_details() {
+  let valid = true;
+  let error = "";
+
+  let num_balls = $("#prop-num-balls").val();
+  if (num_balls < 50 || num_balls > 90) {
+    setError("#prop-num-balls");
+    error += "Number of balls must be between 50-90\n";
+    valid = false;
+  } else {
+    cleanError("#prop-num-balls");
+  }
+  let num_monsters = $("#prop-num-monsters").val();
+  if (num_monsters < 1 || num_monsters > 4) {
+    setError("#prop-num-monsters");
+    error += "Number of monsters must be between 1-4\n";
+    valid = false;
+  } else {
+    cleanError("#prop-num-monsters");
+  }
+  let time_amount = $("#prop-time").val();
+  if (time_amount < 60) {
+    setError("#prop-time");
+    error += "Amount of time must be atleast 60\n";
+    valid = false;
+  } else {
+    cleanError("#prop-time");
+  }
+  if (valid) {
+    number_of_balls = num_balls;
+    num_of_monsters = num_monsters;
+    game_time = time_amount;
+  } else {
+    alert(error);
+  }
+  return false;
 }
