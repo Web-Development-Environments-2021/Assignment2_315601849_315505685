@@ -21,13 +21,28 @@ function StartNewGame() {
 
 
 function StartGame() {
+    pac_color = "yellow";
     setMonstersLocation();
     setPakmanLocation();
-    //drawBoard();
 }
 
 function setMonstersLocation(){
+    let emptyCell;
+    let monster;
+    for(let i = 0; i < monsters_array.length; i++){
+        monster = monsters_array[i];
+        if(monster.x != null && monster.y != null){
+            board[monster.x][monster.y] = null;
+        }
 
+        emptyCell = findRandomEmptyCell(board);
+        let x = emptyCell[0];
+        let y = emptyCell[1];
+        
+        monster.x = x;
+        monster.y = y;
+        board[x][y] = monster;
+    }
 }
 
 function setPakmanLocation(){
@@ -95,14 +110,11 @@ function CreateBoardGame() {
 
     let emptyCell;
 
-    while(remain_mosters > 0){
-        emptyCell = findRandomEmptyCell(board);
-        let i = emptyCell[0];
-        let j = emptyCell[1];
-        let life_to_reduce = monsters_life[remain_mosters -1]
-        board[i][j] = new Monster(i, j, life_to_reduce);
-        remain_mosters--;
+    for(let i = 0; i < num_of_monsters; i++){
+        let life_to_reduce = monsters_life[i];
+        monsters_array[i] = new Monster(null, null, life_to_reduce);
     }
+    setMonstersLocation();
 
     while (food_5_remain > 0) {
         emptyCell = findRandomEmptyCell(board);
@@ -241,32 +253,46 @@ function UpdatePosition() {
     }
 
     let cur_obj = board[pacman_obj.x][pacman_obj.y];
-    if (cur_obj != null && cur_obj.constructor.name == "Candy") {
-        score += cur_obj.points;
-        candies_count--;
+    if (cur_obj != null && cur_obj.constructor.name == "Monster"){
+        for (var i=0; i < cur_obj.life_to_reduce; i++){
+            reduceLife();
+        }
+        StartGame();
     }
+    else{
+        if (cur_obj != null && cur_obj.constructor.name == "Candy") {
+            score += cur_obj.points;
+            candies_count--;
+        }
 
-    //Place Packman in new position in array
-    board[pacman_obj.x][pacman_obj.y] = pacman_obj;
+        //Place Packman in new position in array
+        board[pacman_obj.x][pacman_obj.y] = pacman_obj;
+    }
 
     var currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
     if (time_elapsed >= game_time) {
-        window.clearInterval(interval);
-        window.alert("Game Over");
+        stopGame("Game Over");
     }
     if (score >= 100 && time_elapsed <= 10) {
         pac_color = "#D17A22";
     }
     if (candies_count == 0) {
-        Draw();
-        window.clearInterval(interval);
-        window.alert("Game completed");
-    } else {
-        Draw();
+        stopGame("Game completed");
+    }
+    Draw();
+}
+
+function reduceLife(){
+    $("#heart_"+life).hide();
+    life--;
+    if (life == 0){
+        stopGame("Game Over");
     }
 }
 
 
-
-
+function stopGame(message){
+    window.clearInterval(interval);
+    window.alert(message);
+}
