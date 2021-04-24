@@ -18,9 +18,9 @@ function waitingEscapeKeypress() {
   return new Promise((resolve) => {
     document.addEventListener("keydown", onKeyHandler);
     function onKeyHandler(e) {
+      if(e.which==27){
       document.removeEventListener("keydown", onKeyHandler);
       resolve();
-      if(e.which==27){
         close_about()
       }
     }
