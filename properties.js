@@ -113,6 +113,9 @@ function save_details() {
     color_5_balls = document.getElementById("color_ball_5").value;
     color_15_balls = document.getElementById("color_ball_15").value;
     color_25_balls = document.getElementById("color_ball_25").value;
+    $("#ball-det").html("Number of Balls: ".bold() + number_of_balls);
+    $("#mons-det").html("Number of Monsters: ".bold() + num_of_monsters);
+    $("#time-det").html("Game Time: ".bold() + game_time);
     alert("Saved Properties");
   } else {
     alert(error);
