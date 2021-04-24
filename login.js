@@ -34,5 +34,6 @@ function welcomeUser(username){
     $(".logged-button").show()
     $("#welcome-greeting").text("Welcome " + username +"!");
     $("#logged-game").show()
+    $("#user-det").html(username.bold() + " Is Playing");
     $("#game-connect").hide()
 }
