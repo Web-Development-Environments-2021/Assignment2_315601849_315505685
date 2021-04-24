@@ -13,6 +13,7 @@ function StartNewGame() {
     if (interval != null) {
         window.clearInterval(interval);
     }
+    monsters_array = new Array();
     keysDown = {};
     candies_count = 0;
     $(".hearts").show();
