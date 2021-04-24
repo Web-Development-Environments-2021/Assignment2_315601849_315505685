@@ -22,6 +22,19 @@ body {
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
+#game-info{
+  float: left;
+  padding-left: 20px;
+  clear: none;
+  margin-bottom: 20px;
+}
+
+#game-info div{ 
+  float:left;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
