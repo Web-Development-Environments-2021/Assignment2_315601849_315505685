@@ -47,7 +47,7 @@
           Properties
         </button>
         <button
-          onclick="show_about()"
+          onclick="show_about(); return false;"
           class="navbutton bouncy"
           style="animation-delay: 0.35s"
         >
@@ -280,10 +280,11 @@
 
       <dialog id="about">
         <div class="div-about">
+          <span onclick=close_about() class="about_close">&times;</span>
+          <br>
           <label>Hello</label>
-          <br />
-          <button onclick="close_about()">Close dialog</button>
         </div>
+        <div class="blocker" onclick="close_about()"></div>
       </dialog>
       <div id="all_game" class="div-content" style="width: 60%">
         <div id="score">
