@@ -3,6 +3,7 @@ let monsters_array = new Array();
 let candies_count = 0;
 //let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
 let monsters_life = [2,1,1,1]
+let monsters_position = [[0,0],[0,board_hight-1],[board_width-1,0],[board_width-1,board_hight-1]]
 
 $(document).ready(function () {
     $(".hidden_hearts").hide();
@@ -33,17 +34,14 @@ function StartGame() {
 }
 
 function setMonstersLocation(){
-    let emptyCell;
-    let monster;
     for(let i = 0; i < monsters_array.length; i++){
         monster = monsters_array[i];
         if(monster.x != null && monster.y != null){
             board[monster.x][monster.y] = null;
         }
 
-        emptyCell = findRandomEmptyCell(board);
-        let x = emptyCell[0];
-        let y = emptyCell[1];
+        let x = monsters_position[i][0];
+        let y = monsters_position[i][1];
         
         monster.x = x;
         monster.y = y;
