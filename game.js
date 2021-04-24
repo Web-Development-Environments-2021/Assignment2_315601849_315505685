@@ -5,6 +5,7 @@ let candies_count = 0;
 let monsters_life = [2,1,1,1]
 let monsters_position = [[0,0],[0,board_hight-1],[board_width-1,0],[board_width-1,board_hight-1]]
 let start_interval;
+let empty_cells;
 
 $(document).ready(function () {
     $(".hidden_hearts").hide();
@@ -56,10 +57,10 @@ function setMonstersLocation(){
 }
 
 function setPakmanLocation(){
-    let cur_x = pacman_obj.x;
-    let cur_y = pacman_obj.y;
-    //clean pacman position
-    board[cur_x][cur_y] = null;
+    //clean current pacman position
+    if(pacman_obj.x != null && pacman_obj.y != null){
+        board[pacman_obj.x][pacman_obj.y] = null;
+    }
 
     let emptyCell = findRandomEmptyCell(board);
     let i = emptyCell[0];
@@ -69,11 +70,17 @@ function setPakmanLocation(){
     board[i][j] = pacman_obj;
 }
 
+function placePill(){
+    let emptyCell = findRandomEmptyCell(board);
+    let i = emptyCell[0];
+    let j = emptyCell[1];
+    board[i][j] = new Pill(i, j);
+}
+
 
 function CreateBoardGame() {
     var cnt = board_width * board_hight;
-    let wall_remain = 20;
-    let remain_pills = 2;
+    let number_of_pills = 2;
 
     //calculate number of balls
     let food_5_remain = Math.floor(number_of_balls * percentage_5_balls);
@@ -84,6 +91,7 @@ function CreateBoardGame() {
 
     var pacman_remain = 1;
     board = create_board();
+    empty_cells = new Array();
 
     //monsters
     for(let i = 0; i < num_of_monsters; i++){
@@ -92,37 +100,33 @@ function CreateBoardGame() {
     }
     setMonstersLocation();
 
-    //pills
-    let emptyCell;
-    while (remain_pills > 0) {
-        emptyCell = findRandomEmptyCell(board);
-        let i = emptyCell[0];
-        let j = emptyCell[1];
-        
-        board[i][j] = new Pill(i, j);
-        remain_pills--;
-    }
-
     for (var i = 0; i < board_width; i++) {
         for (var j = 0; j < board_hight; j++) {
             var randomNum = Math.random();
             if (board[i][j]==null){
+
                 //Candy
                 if (randomNum <= (1.0 * food_5_remain) / cnt) {
                     food_5_remain--;
                     board[i][j] = new Candy(i, j, 5);
                     candies_count++;
                 }
-                //Pacman
-                else if (randomNum < (1.0 * (pacman_remain + food_5_remain)) / cnt) {
-                    pacman_obj = new Pacman(i, j);
-                    pacman_remain--;
-                    board[i][j] = pacman_obj;
+                else{
+                    empty_cells.push([i, j])
                 }
 
                 cnt--;
             }
         }
+    }
+
+    //pacman
+    pacman_obj = new Pacman(null,null);
+    setPakmanLocation();
+
+    //pills
+    for(let i = 0; i < number_of_pills; i++){
+        placePill();
     }
 
     //remaining candies 
@@ -156,13 +160,10 @@ function placeCandies(points){
 
 
 function findRandomEmptyCell(board) {
-    var i = Math.floor(Math.random() * 9 + 1);
-    var j = Math.floor(Math.random() * 9 + 1);
-    while (board[i][j] != null) {
-        i = Math.floor(Math.random() * 9 + 1);
-        j = Math.floor(Math.random() * 9 + 1);
-    }
-    return [i, j];
+    let indx = Math.floor(Math.random() * empty_cells.length);
+    let position = empty_cells[indx];
+    empty_cells.splice(indx, 1)
+    return position;
 }
 
 function getPoints() {
