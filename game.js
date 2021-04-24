@@ -4,6 +4,7 @@ let candies_count = 0;
 //let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
 let monsters_life = [2,1,1,1]
 let monsters_position = [[0,0],[0,board_hight-1],[board_width-1,0],[board_width-1,board_hight-1]]
+let start_interval;
 
 $(document).ready(function () {
     $(".hidden_hearts").hide();
@@ -20,19 +21,22 @@ function StartNewGame() {
     $(".hidden_hearts").hide();
     life = 5;
     score = 0;
+    interval_score = 0;
     pac_color = "yellow";
     start_time = new Date();
+    start_interval = new Date();
     board = CreateBoardGame();
     //Start game
     interval = setInterval(UpdatePosition, 250);
 
 }
 
-
 function StartGame() {
     pac_color = "yellow";
     setMonstersLocation();
     setPakmanLocation();
+    start_interval = new Date();
+    interval_score = 0;
 }
 
 function setMonstersLocation(){
@@ -81,6 +85,12 @@ function CreateBoardGame() {
     var pacman_remain = 1;
     board = create_board();
 
+    for(let i = 0; i < num_of_monsters; i++){
+        let life_to_reduce = monsters_life[i];
+        monsters_array[i] = new Monster(null, null, life_to_reduce);
+    }
+    setMonstersLocation();
+
     for (var i = 0; i < board_width; i++) {
         for (var j = 0; j < board_hight; j++) {
             var randomNum = Math.random();
@@ -105,12 +115,6 @@ function CreateBoardGame() {
     }
 
     let emptyCell;
-
-    for(let i = 0; i < num_of_monsters; i++){
-        let life_to_reduce = monsters_life[i];
-        monsters_array[i] = new Monster(null, null, life_to_reduce);
-    }
-    setMonstersLocation();
 
     while (food_5_remain > 0) {
         emptyCell = findRandomEmptyCell(board);
@@ -174,7 +178,7 @@ function getPoints() {
 function Draw() {
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
-    lblTime.value = time_elapsed;
+    lblTime.value = total_time_elapsed;
 
     //draw border
     context.beginPath();
@@ -270,6 +274,7 @@ function UpdatePosition() {
     else{
         if (cur_obj != null && cur_obj.constructor.name == "Candy") {
             score += cur_obj.points;
+            interval_score += cur_obj.points;
             candies_count--;
         }
         if (cur_obj != null && cur_obj.constructor.name == "Pill") {
@@ -282,11 +287,12 @@ function UpdatePosition() {
     }
 
     var currentTime = new Date();
-    time_elapsed = (currentTime - start_time) / 1000;
-    if (time_elapsed >= game_time) {
+    total_time_elapsed = (currentTime - start_time) / 1000;
+    time_elapsed = (currentTime - start_interval) / 1000;
+    if (total_time_elapsed >= game_time) {
         stopGame("Game Over");
     }
-    if (score >= 100 && time_elapsed <= 10) {
+    if (interval_score >= 100 && time_elapsed <= 10) {
         pac_color = "#D17A22";
     }
     if (candies_count == 0) {
