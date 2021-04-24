@@ -1,6 +1,7 @@
 let pacman_obj;
-let candies_array = new Array();
+let monsters_array = new Array();
 let candies_count = 0;
+let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
 
 function StartNewGame() {
     if (interval != null) {
@@ -47,6 +48,8 @@ function setPakmanLocation(){
 function CreateBoardGame() {
     var cnt = board_width * board_hight;
     let wall_remain = 20;
+    let remain_mosters = num_of_monsters;
+
     //calculate number of balls
     let food_5_remain = Math.floor(number_of_balls * percentage_5_balls);
     let food_15_remain = Math.floor(number_of_balls * percentage_15_balls);
@@ -89,8 +92,19 @@ function CreateBoardGame() {
         }
     }
 
+    let emptyCell;
+
+    while(remain_mosters > 0){
+        emptyCell = findRandomEmptyCell(board);
+        let i = emptyCell[0];
+        let j = emptyCell[1];
+        let color = monsters_colors[remain_mosters -1]
+        board[i][j] = new Monster(i, j, color);
+        remain_mosters--;
+    }
+
     while (food_5_remain > 0) {
-        var emptyCell = findRandomEmptyCell(board);
+        emptyCell = findRandomEmptyCell(board);
         let i = emptyCell[0];
         let j = emptyCell[1];
         //let points = 5;
@@ -100,7 +114,7 @@ function CreateBoardGame() {
     }
 
     while (food_15_remain > 0) {
-        var emptyCell = findRandomEmptyCell(board);
+        emptyCell = findRandomEmptyCell(board);
         let i = emptyCell[0];
         let j = emptyCell[1];
         //let points = 15;
@@ -110,7 +124,7 @@ function CreateBoardGame() {
     }
 
     while (food_25_remain > 0) {
-        var emptyCell = findRandomEmptyCell(board);
+        emptyCell = findRandomEmptyCell(board);
         let i = emptyCell[0];
         let j = emptyCell[1];
         //let points = 25;
