@@ -3,6 +3,7 @@ let monsters_array = new Array();
 let candies_count = 0;
 //let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
 let monsters_life = [2, 1, 1, 1];
+let move_monsters = 0;
 let monsters_position = [
   [0, 0],
   [0, board_hight - 1],
@@ -254,7 +255,13 @@ function updateMonsterPosition() {
 }
 
 function UpdatePosition() {
-  updateMonsterPosition();
+  if (move_monsters == 0) {
+    updateMonsterPosition();
+    move_monsters = 1;
+  } else {
+    move_monsters = 0;
+  }
+
   let cur_x = pacman_obj.x;
   let cur_y = pacman_obj.y;
   //clean pacman position
