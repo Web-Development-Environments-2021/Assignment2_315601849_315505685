@@ -1,6 +1,9 @@
 
 $(document).ready(function () {
+    $("#welcome").show();
+    $("#welcome-user").hide();
     $("#logged_in").hide();
+    $(".logged-button").hide()
   });
 
 function login(){
@@ -26,6 +29,7 @@ function login(){
 function welcomeUser(username){
     show_only_button("welcome");
     $(".welcome-button").hide();
-    $("#welcome-greeting").show();
+    $("#welcome-user").show();
+    $(".logged-button").show()
     $("#welcome-greeting").text("Welcome " + username +"!");
 }

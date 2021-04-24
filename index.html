@@ -65,7 +65,16 @@
     <div id="content">
       <div id="welcome" class="div-content">
         <br /><img class="photo" src="resources/images/logo.png" /><br />
-        <p id="welcome-greeting">Welcome User!</p>
+        <div class='welcome-user'>
+          <p id="welcome-greeting">Welcome User!</p>
+          <br>
+          <button class="logged-button" onclick="show_only_button('properties')">
+            Properties
+          </button>
+          <button class="logged-button" onclick="show_only_button('all_game')">
+            Game
+          </button>
+        </div>
         <button class="welcome-button" onclick="show_only_button('register')">
           Register
         </button>
