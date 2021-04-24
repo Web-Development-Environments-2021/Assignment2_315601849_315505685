@@ -16,6 +16,7 @@ function StartNewGame() {
     keysDown = {};
     candies_count = 0;
     $(".hearts").show();
+    $(".hidden_hearts").hide();
     life = 5;
     score = 0;
     pac_color = "yellow";
