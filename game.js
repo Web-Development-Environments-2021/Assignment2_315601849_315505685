@@ -1,7 +1,8 @@
 let pacman_obj;
 let monsters_array = new Array();
 let candies_count = 0;
-let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
+//let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
+let monsters_life = [2,1,1,1]
 
 function StartNewGame() {
     if (interval != null) {
@@ -98,8 +99,8 @@ function CreateBoardGame() {
         emptyCell = findRandomEmptyCell(board);
         let i = emptyCell[0];
         let j = emptyCell[1];
-        let color = monsters_colors[remain_mosters -1]
-        board[i][j] = new Monster(i, j, color);
+        let life_to_reduce = monsters_life[remain_mosters -1]
+        board[i][j] = new Monster(i, j, life_to_reduce);
         remain_mosters--;
     }
 
