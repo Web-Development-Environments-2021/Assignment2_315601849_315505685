@@ -213,6 +213,7 @@ function updateMonsterPosition() {
   for (let mons_idx = 0; mons_idx < monsters_array.length; mons_idx++) {
     monster = monsters_array[mons_idx];
     possible_movement = [
+      [monster.x, monster.y],
       [monster.x + 1, monster.y],
       [monster.x, monster.y + 1],
       [monster.x - 1, monster.y],
@@ -230,7 +231,7 @@ function updateMonsterPosition() {
       ) {
         continue;
       }
-      if (!(board[curr_move[1]][curr_move[0]] instanceof Wall)) {
+      if (!(board[curr_move[0]][curr_move[1]] instanceof Wall)) {
         if (
           Math.sqrt(
             Math.pow(curr_move[0] - pacman_obj.x, 2) +
@@ -239,13 +240,16 @@ function updateMonsterPosition() {
         ) {
           move = curr_move;
           closest = Math.sqrt(
-            Math.pow(curr_move[0], 2) + Math.pow(curr_move[1], 2)
+            Math.pow(curr_move[0] - pacman_obj.x, 2) +
+              Math.pow(curr_move[1] - pacman_obj.y, 2)
           );
         }
       }
     }
     monster.x = move[0];
     monster.y = move[1];
+    monsters_array[mons_idx][0] = move[0];
+    monsters_array[mons_idx][1] = move[1];
   }
 }
 
