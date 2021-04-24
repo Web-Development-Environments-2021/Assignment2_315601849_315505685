@@ -8,7 +8,9 @@ function StartNewGame() {
     if (interval != null) {
         window.clearInterval(interval);
     }
-
+    keysDown = {};
+    candies_count = 0;
+    $(".hearts").show();
     life = 5;
     score = 0;
     pac_color = "yellow";
@@ -257,7 +259,9 @@ function UpdatePosition() {
         for (var i=0; i < cur_obj.life_to_reduce; i++){
             reduceLife();
         }
-        StartGame();
+        if (life > 0){
+            StartGame();
+        }
     }
     else{
         if (cur_obj != null && cur_obj.constructor.name == "Candy") {
