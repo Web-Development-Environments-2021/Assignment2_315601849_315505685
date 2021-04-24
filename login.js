@@ -1,4 +1,8 @@
 
+$(document).ready(function () {
+    $("#logged_in").hide();
+  });
+
 function login(){
     let username = $("#login-username").val();
     let password = $("#login-password").val();
@@ -13,6 +17,8 @@ function login(){
         welcomeUser(username);
         $("#login-form").trigger("reset");
         logged_in_user=username;
+        $("#logged_in").show();
+        $("#login-form").hide();
     }
     return false;
 }
