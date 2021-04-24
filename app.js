@@ -20,29 +20,8 @@ function show_only_button(button_text) {
 
 $(document).ready(function () {
   context = canvas.getContext("2d");
-  $("#welcome").show();
-  $("#welcome-greeting").hide();
   setMaxDate();
   set_default_properties();
-  StartGame();
-});
-
-function initiateGame(){
-  setBallsLocation();
-  setMonstersLocation();
-  setPakmanLocation()
-  drawBoard();
-}
-
-
-function StartGame() {
-  life = 5;
-  
-  score = 0;
- // pac_color = "yellow";
-  start_time = new Date();
-
-  board = CreateBoardGame();
 
   //Set handlers for keys
   keysDown = {};
@@ -61,7 +40,7 @@ function StartGame() {
     false
   );
 
-  //Start game
-  interval = setInterval(UpdatePosition, 250);
-}
+});
+
+
 

@@ -2,14 +2,56 @@ let pacman_obj;
 let candies_array = new Array();
 let candies_count = 0;
 
+function StartNewGame() {
+    if (interval != null) {
+        window.clearInterval(interval);
+    }
+
+    life = 5;
+    score = 0;
+    pac_color = "yellow";
+    start_time = new Date();
+    board = CreateBoardGame();
+    //Start game
+    interval = setInterval(UpdatePosition, 250);
+
+}
+
+
+function StartGame() {
+    setMonstersLocation();
+    setPakmanLocation();
+    //drawBoard();
+}
+
+function setMonstersLocation(){
+
+}
+
+function setPakmanLocation(){
+    let cur_x = pacman_obj.x;
+    let cur_y = pacman_obj.y;
+    //clean pacman position
+    board[cur_x][cur_y] = null;
+
+    let emptyCell = findRandomEmptyCell(board);
+    let i = emptyCell[0];
+    let j = emptyCell[1];
+    pacman_obj.x = i;
+    pacman_obj.y = j;
+    board[i][j] = pacman_obj;
+}
+
+
+
 function CreateBoardGame() {
     var cnt = board_width * board_hight;
     let wall_remain = 20;
     //calculate number of balls
-    let food_5_remain = Math.floor(number_of_balls*percentage_5_balls);
-    let food_15_remain = Math.floor(number_of_balls*percentage_15_balls);
-    let food_25_remain = Math.floor(number_of_balls*percentage_25_balls);
-    let leftovers = number_of_balls - (food_5_remain+food_15_remain+food_25_remain);
+    let food_5_remain = Math.floor(number_of_balls * percentage_5_balls);
+    let food_15_remain = Math.floor(number_of_balls * percentage_15_balls);
+    let food_25_remain = Math.floor(number_of_balls * percentage_25_balls);
+    let leftovers = number_of_balls - (food_5_remain + food_15_remain + food_25_remain);
     food_5_remain += leftovers;
 
     var pacman_remain = 1;
@@ -33,7 +75,7 @@ function CreateBoardGame() {
                 board[i][j] = pacman_obj;
             }
             //Set Obstacles
-            else if (randomNum <= (1.0 * (wall_remain + pacman_remain + food_5_remain)) / cnt){
+            else if (randomNum <= (1.0 * (wall_remain + pacman_remain + food_5_remain)) / cnt) {
                 wall_remain--;
                 board[i][j] = new Wall(i, j);
             }
@@ -43,7 +85,7 @@ function CreateBoardGame() {
             }
 
             cnt--;
-            
+
         }
     }
 
@@ -91,8 +133,8 @@ function findRandomEmptyCell(board) {
     return [i, j];
 }
 
-function getPoints(){
-    let points = Math.floor(Math.random() * 3)*10 +5;
+function getPoints() {
+    let points = Math.floor(Math.random() * 3) * 10 + 5;
     return points;
 }
 
@@ -101,10 +143,10 @@ function Draw() {
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
-    
+
     //draw border
     context.beginPath();
-    context.rect(0, 0, cell_size * board_width*2, cell_size * board_hight*2);
+    context.rect(0, 0, cell_size * board_width * 2, cell_size * board_hight * 2);
     context.strokeStyle = "black";
     context.stroke();
 
@@ -165,7 +207,7 @@ function UpdatePosition() {
     if (key == 'LEFT') {
         pacman_obj.angle = 1;
         if (cur_x > 0) {
-            let next_obj = board[cur_x -1][cur_y];
+            let next_obj = board[cur_x - 1][cur_y];
             if (next_obj == null || next_obj.constructor.name != "Wall") {
                 pacman_obj.x--;
             }
@@ -175,7 +217,7 @@ function UpdatePosition() {
     if (key == 'RIGHT') {
         pacman_obj.angle = 0;
         if (cur_x < board_width - 1) {
-            let next_obj = board[cur_x +1][cur_y];
+            let next_obj = board[cur_x + 1][cur_y];
             if (next_obj == null || next_obj.constructor.name != "Wall") {
                 pacman_obj.x++;
             }
@@ -194,8 +236,8 @@ function UpdatePosition() {
 
     var currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
-    if (time_elapsed >= game_time){
-        window.clearInterval(interval);  
+    if (time_elapsed >= game_time) {
+        window.clearInterval(interval);
         window.alert("Game Over");
     }
     if (score >= 100 && time_elapsed <= 10) {
@@ -203,7 +245,7 @@ function UpdatePosition() {
     }
     if (candies_count == 0) {
         Draw();
-        window.clearInterval(interval);  
+        window.clearInterval(interval);
         window.alert("Game completed");
     } else {
         Draw();
