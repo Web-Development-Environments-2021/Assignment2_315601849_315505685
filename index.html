@@ -72,17 +72,17 @@
           <p class="logged-button">You can start a new game with our default values,<br>
           or you can go to properties to change the game prefences.</p>
           <br>
-          <button class="logged-button" onclick="show_only_button('properties')">
+          <button class="logged-button div_but" onclick="show_only_button('properties')">
             Properties
           </button>
-          <button class="logged-button" onclick="show_only_button('all_game')">
+          <button class="logged-button div_but" onclick="show_only_button('all_game')">
             Game
           </button>
         </div>
-        <button class="welcome-button" onclick="show_only_button('register')">
+        <button class="welcome-button div_but" onclick="show_only_button('register')">
           Register
         </button>
-        <button class="welcome-button" onclick="show_only_button('login')">
+        <button class="welcome-button div_but" onclick="show_only_button('login')">
           Login
         </button>
       </div>
@@ -140,8 +140,8 @@
           />
           <br />
           <br />
-          <button id="reg-submit" onclick="return register()">Submit</button>
-          <input type="reset" value="Reset" />
+          <button id="reg-submit" class='div_but' onclick="return register()">Submit</button>
+          <input type="reset" class='div_but' value="Reset" />
         </form>
       </div>
       <div id="login" class="div-content">
@@ -165,8 +165,8 @@
             required
           />
           <br /><br />
-          <button id="login-submit" onclick="return login()">Login</button>
-          <input type="reset" value="Reset" />
+          <button id="login-submit" class='div_but' onclick="return login()">Login</button>
+          <input type="reset" class='div_but' value="Reset" />
         </form>
         <label id="logged_in">You Are Already Logged In.</label>
       </div>
@@ -287,11 +287,11 @@
           </div>
           <br />
           <br />
-          <button id="prop-random" onclick="return rand_details()">
+          <button id="prop-random" class='div_but' onclick="return rand_details()">
             Random
           </button>
-          <button id="prop-submit" onclick="return save_details()">Save</button>
-          <input type="reset" value="Reset" />
+          <button id="prop-submit" class='div_but' onclick="return save_details()">Save</button>
+          <input type="reset" class='div_but' value="Reset" />
         </form>
       </div>
 
@@ -307,7 +307,7 @@
         </div>
         <div class="blocker" onclick="close_about()"></div>
       </dialog>
-      <div id="all_game" class="div-content" style="width: 60%">
+      <div id="all_game" class="div-content" style="width: 700px;">
         <span id='game-info'>
         <div id="score">
           <label for="lblScore">Score:</label>
@@ -328,8 +328,8 @@
       </span>
       
         <div id="game">
-          <canvas id="canvas" height="500" width="700"></canvas>
-          <button onclick="StartNewGame()">Start New Game</button>
+          <canvas id="canvas" height="500" width="680"></canvas>
+          <button onclick="StartNewGame()" class='div-button div_but' style='width: 150px;height: 40px;'>Start New Game</button>
         </div>
       </div>
     </div>
