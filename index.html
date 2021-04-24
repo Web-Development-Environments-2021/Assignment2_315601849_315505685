@@ -310,36 +310,39 @@
         <div class="blocker" onclick="close_about()"></div>
       </dialog>
       <div id="all_game" class="div-content" style="width: 700px;">
-        <span id='game-info'>
-        <div id="score">
-          <label for="lblScore">Score:</label>
-          <input id="lblScore" type="text" />
+        <div id='logged-game'>
+          <span id='game-info'>
+            <div id="score">
+              <label for="lblScore">Score:</label>
+              <input id="lblScore" type="text" />
+            </div>
+            <div id="time">
+              <label for="lblTime">Time:</label>
+              <input id="lblTime" type="text" />
+            </div>
+            <div id="lives">
+              <label for="lblTime">Lives:</label>
+              <img id="heart_1" class='hearts' src="resources/images/heart.png" height="15" width="15" />
+              <img id="heart_2" class='hearts' src="resources/images/heart.png" height="15" width="15" />
+              <img id="heart_3" class='hearts' src="resources/images/heart.png" height="15" width="15" />
+              <img id="heart_4" class='hearts' src="resources/images/heart.png" height="15" width="15" />
+              <img id="heart_5" class='hearts' src="resources/images/heart.png" height="15" width="15" />
+              <img id="heart_6" class='hidden_hearts' src="resources/images/heart.png" height="15" width="15" />
+              <img id="heart_7" class='hidden_hearts' src="resources/images/heart.png" height="15" width="15" />
+            </div>
+          </span>
+          
+            <div id="game">
+              <canvas id="canvas" height="500" width="680"></canvas>
+              <div id="game_details" style="margin-bottom: 10px;">
+                <label id='ball-det' class='detail-label'><b>Number of Balls:</b> 50</label>
+                <label id='mons-det' class='detail-label'><b>Number of Monsters:</b> 4</label>
+                <label id='time-det' class='detail-label'><b>Game Time:</b> 60</label>
+              </div>
+              <button onclick="StartNewGame()" class='div-button div_but' style='width: 150px;height: 40px;'>Start New Game</button>
+            </div>
         </div>
-        <div id="time">
-          <label for="lblTime">Time:</label>
-          <input id="lblTime" type="text" />
-        </div>
-        <div id="lives">
-          <label for="lblTime">Lives:</label>
-          <img id="heart_1" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-          <img id="heart_2" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-          <img id="heart_3" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-          <img id="heart_4" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-          <img id="heart_5" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-          <img id="heart_6" class='hidden_hearts' src="resources/images/heart.png" height="15" width="15" />
-          <img id="heart_7" class='hidden_hearts' src="resources/images/heart.png" height="15" width="15" />
-        </div>
-      </span>
-      
-        <div id="game">
-          <canvas id="canvas" height="500" width="680"></canvas>
-          <div id="game_details" style="margin-bottom: 10px;">
-            <label id='ball-det' class='detail-label'><b>Number of Balls:</b> 50</label>
-            <label id='mons-det' class='detail-label'><b>Number of Monsters:</b> 4</label>
-            <label id='time-det' class='detail-label'><b>Game Time:</b> 60</label>
-          </div>
-          <button onclick="StartNewGame()" class='div-button div_but' style='width: 150px;height: 40px;'>Start New Game</button>
-        </div>
+        <label id='game-connect'>You Must Login Before Playing.</label>
       </div>
     </div>
     <div id="footer"></div>

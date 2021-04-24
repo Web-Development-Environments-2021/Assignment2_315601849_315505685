@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("#welcome-user").hide();
     $("#logged_in").hide();
     $(".logged-button").hide()
+    $("#logged-game").hide()
   });
 
 function login(){
@@ -32,4 +33,6 @@ function welcomeUser(username){
     $("#welcome-user").show();
     $(".logged-button").show()
     $("#welcome-greeting").text("Welcome " + username +"!");
+    $("#logged-game").show()
+    $("#game-connect").hide()
 }
