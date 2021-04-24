@@ -12,6 +12,7 @@ function login(){
     else{
         welcomeUser(username);
         $("#login-form").trigger("reset");
+        logged_in_user=username;
     }
     return false;
 }
