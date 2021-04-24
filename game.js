@@ -101,6 +101,14 @@ function Draw() {
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
+    
+    //draw border
+    context.beginPath();
+    context.rect(0, 0, cell_size * board_width*2, cell_size * board_hight*2);
+    context.strokeStyle = "black";
+    context.stroke();
+
+    //draw game elements
     for (var i = 0; i < board_width; i++) {
         for (var j = 0; j < board_hight; j++) {
             let obj = board[i][j];
@@ -182,7 +190,10 @@ function UpdatePosition() {
 
     var currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
-    //
+    if (time_elapsed >= game_time){
+        window.clearInterval(interval);  
+        window.alert("Game Over");
+    }
     if (score >= 100 && time_elapsed <= 10) {
         pac_color = "#D17A22";
     }
