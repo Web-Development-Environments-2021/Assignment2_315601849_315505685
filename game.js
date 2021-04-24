@@ -143,6 +143,7 @@ function UpdatePosition() {
 
     let key = GetKeyPressed();
     if (key == 'UP') {
+        pacman_obj.angle = 1.5;
         if (cur_y > 0) {
             let next_obj = board[cur_x][cur_y - 1];
             if (next_obj == null || next_obj.constructor.name != "Wall") {
@@ -152,6 +153,7 @@ function UpdatePosition() {
     }
 
     if (key == 'DOWN') {
+        pacman_obj.angle = 0.5;
         if (cur_y < board_hight - 1) {
             let next_obj = board[cur_x][cur_y + 1];
             if (next_obj == null || next_obj.constructor.name != "Wall") {
@@ -161,6 +163,7 @@ function UpdatePosition() {
     }
 
     if (key == 'LEFT') {
+        pacman_obj.angle = 1;
         if (cur_x > 0) {
             let next_obj = board[cur_x -1][cur_y];
             if (next_obj == null || next_obj.constructor.name != "Wall") {
@@ -170,6 +173,7 @@ function UpdatePosition() {
     }
 
     if (key == 'RIGHT') {
+        pacman_obj.angle = 0;
         if (cur_x < board_width - 1) {
             let next_obj = board[cur_x +1][cur_y];
             if (next_obj == null || next_obj.constructor.name != "Wall") {
