@@ -79,37 +79,28 @@ function CreateBoardGame() {
     food_5_remain += leftovers;
 
     var pacman_remain = 1;
-    board = new Array();
+    board = create_board();
 
     for (var i = 0; i < board_width; i++) {
-        board[i] = new Array();
         for (var j = 0; j < board_hight; j++) {
             var randomNum = Math.random();
-            //Candy
-            if (randomNum <= (1.0 * food_5_remain) / cnt) {
-                //let points = 5;
-                food_5_remain--;
-                board[i][j] = new Candy(i, j, 5);
-                candies_count++;
-            }
-            //Pacman
-            else if (randomNum < (1.0 * (pacman_remain + food_5_remain)) / cnt) {
-                pacman_obj = new Pacman(i, j);
-                pacman_remain--;
-                board[i][j] = pacman_obj;
-            }
-            //Set Obstacles
-            else if (randomNum <= (1.0 * (wall_remain + pacman_remain + food_5_remain)) / cnt) {
-                wall_remain--;
-                board[i][j] = new Wall(i, j);
-            }
-            //Empty Cell
-            else {
-                board[i][j] = null;
-            }
+            if (board[i][j]==null){
+                //Candy
+                if (randomNum <= (1.0 * food_5_remain) / cnt) {
+                    //let points = 5;
+                    food_5_remain--;
+                    board[i][j] = new Candy(i, j, 5);
+                    candies_count++;
+                }
+                //Pacman
+                else if (randomNum < (1.0 * (pacman_remain + food_5_remain)) / cnt) {
+                    pacman_obj = new Pacman(i, j);
+                    pacman_remain--;
+                    board[i][j] = pacman_obj;
+                }
 
-            cnt--;
-
+                cnt--;
+            }
         }
     }
 
