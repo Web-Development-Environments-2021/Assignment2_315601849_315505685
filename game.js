@@ -85,11 +85,23 @@ function CreateBoardGame() {
     var pacman_remain = 1;
     board = create_board();
 
+    //monsters
     for(let i = 0; i < num_of_monsters; i++){
         let life_to_reduce = monsters_life[i];
         monsters_array[i] = new Monster(null, null, life_to_reduce);
     }
     setMonstersLocation();
+
+    //pills
+    let emptyCell;
+    while (remain_pills > 0) {
+        emptyCell = findRandomEmptyCell(board);
+        let i = emptyCell[0];
+        let j = emptyCell[1];
+        
+        board[i][j] = new Pill(i, j);
+        remain_pills--;
+    }
 
     for (var i = 0; i < board_width; i++) {
         for (var j = 0; j < board_hight; j++) {
@@ -97,7 +109,6 @@ function CreateBoardGame() {
             if (board[i][j]==null){
                 //Candy
                 if (randomNum <= (1.0 * food_5_remain) / cnt) {
-                    //let points = 5;
                     food_5_remain--;
                     board[i][j] = new Candy(i, j, 5);
                     candies_count++;
@@ -114,48 +125,33 @@ function CreateBoardGame() {
         }
     }
 
-    let emptyCell;
-
+    //remaining candies 
     while (food_5_remain > 0) {
-        emptyCell = findRandomEmptyCell(board);
-        let i = emptyCell[0];
-        let j = emptyCell[1];
-        //let points = 5;
-        board[i][j] = new Candy(i, j, 5);
+        placeCandies(5);
         food_5_remain--;
         candies_count++;
     }
 
     while (food_15_remain > 0) {
-        emptyCell = findRandomEmptyCell(board);
-        let i = emptyCell[0];
-        let j = emptyCell[1];
-        //let points = 15;
-        board[i][j] = new Candy(i, j, 15);
+        placeCandies(15);
         food_15_remain--;
         candies_count++;
     }
 
     while (food_25_remain > 0) {
-        emptyCell = findRandomEmptyCell(board);
-        let i = emptyCell[0];
-        let j = emptyCell[1];
-        //let points = 25;
-        board[i][j] = new Candy(i, j, 25);
+        placeCandies(25);
         food_25_remain--;
         candies_count++;
     }
 
-    while (remain_pills > 0) {
-        emptyCell = findRandomEmptyCell(board);
-        let i = emptyCell[0];
-        let j = emptyCell[1];
-        
-        board[i][j] = new Pill(i, j);
-        remain_pills--;
-    }
-
     return board;
+}
+
+function placeCandies(points){
+    let emptyCell = findRandomEmptyCell(board);
+    let i = emptyCell[0];
+    let j = emptyCell[1];
+    board[i][j] = new Candy(i, j, points);
 }
 
 
