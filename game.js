@@ -256,6 +256,7 @@ function UpdatePosition() {
 
     let cur_obj = board[pacman_obj.x][pacman_obj.y];
     if (cur_obj != null && cur_obj.constructor.name == "Monster"){
+        score -= cur_obj.life_to_reduce*10;
         for (var i=0; i < cur_obj.life_to_reduce; i++){
             reduceLife();
         }
