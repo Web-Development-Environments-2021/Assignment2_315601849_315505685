@@ -4,6 +4,10 @@ let candies_count = 0;
 //let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
 let monsters_life = [2,1,1,1]
 
+$(document).ready(function () {
+    $(".hidden_hearts").hide();
+  });
+
 function StartNewGame() {
     if (interval != null) {
         window.clearInterval(interval);
@@ -62,11 +66,10 @@ function setPakmanLocation(){
 }
 
 
-
 function CreateBoardGame() {
     var cnt = board_width * board_hight;
     let wall_remain = 20;
-    let remain_mosters = num_of_monsters;
+    let remain_pills = 2;
 
     //calculate number of balls
     let food_5_remain = Math.floor(number_of_balls * percentage_5_balls);
@@ -146,6 +149,15 @@ function CreateBoardGame() {
         board[i][j] = new Candy(i, j, 25);
         food_25_remain--;
         candies_count++;
+    }
+
+    while (remain_pills > 0) {
+        emptyCell = findRandomEmptyCell(board);
+        let i = emptyCell[0];
+        let j = emptyCell[1];
+        
+        board[i][j] = new Pill(i, j);
+        remain_pills--;
     }
 
     return board;
@@ -268,6 +280,10 @@ function UpdatePosition() {
         if (cur_obj != null && cur_obj.constructor.name == "Candy") {
             score += cur_obj.points;
             candies_count--;
+        }
+        if (cur_obj != null && cur_obj.constructor.name == "Pill") {
+            life ++;
+            $("#heart_"+life).show();
         }
 
         //Place Packman in new position in array
