@@ -8,20 +8,28 @@ body {
   text-align: center;
 }
 
-.div_but{
-  border:transparent;
+.div_but {
+  border: transparent;
   padding-left: 5px;
   width: 100px;
   height: 25px;
   padding-right: 5px;
   border-radius: 4px;
-  background: #F7971E;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FFD200, #858484);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top right, rgba(255, 255, 255, 1), transparent);
+  background: #f7971e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #ffd200,
+    #858484
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top right,
+    rgba(255, 255, 255, 1),
+    transparent
+  );
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.div_but:hover{
+.div_but:hover {
   font-weight: bold;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -40,15 +48,15 @@ body {
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-#game-info{
+#game-info {
   float: left;
   padding-left: 20px;
   clear: none;
   margin-bottom: 20px;
 }
 
-#game-info div{ 
-  float:left;
+#game-info div {
+  float: left;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -94,6 +102,16 @@ body {
   text-align: center;
 }
 
+#footer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 100px;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+}
+
 .rec-buttons {
   background: transparent;
   margin-top: 20px;
@@ -129,7 +147,7 @@ body {
   margin: auto;
 }
 
-#about{
+#about {
   background-color: transparent;
   border-color: transparent;
   position: fixed;
@@ -141,7 +159,7 @@ body {
 }
 
 .div-about {
-  margin-top:87px;
+  margin-top: 87px;
   padding-bottom: 20px;
   padding-top: 20px;
   width: 45%;
@@ -151,7 +169,7 @@ body {
   z-index: 1; /* Sit on top */
   width: 75%; /* Full width */
   position: fixed;
-  left:50%;
+  left: 50%;
   margin-left: -37.5%;
   padding-left: 0px;
   padding-right: 0px;
@@ -164,8 +182,8 @@ body {
   z-index: 0;
   bottom: 0;
   right: 0;
-  content: ' ';
-  background: rgba(0,0,0,.5);
+  content: " ";
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #properties-rec {
@@ -186,7 +204,7 @@ body {
 #game_details {
   background: rgb(255, 255, 255);
   padding-top: 10px;
-  margin:auto;
+  margin: auto;
   padding-bottom: 10px;
   width: 70%;
   border-radius: 0.3rem;
@@ -198,7 +216,7 @@ body {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   font-size: small;
 }
-.detail-label{
+.detail-label {
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -221,10 +239,10 @@ body {
 }
 
 .about_close {
- float:right;
- padding-right: 30px;
+  float: right;
+  padding-right: 30px;
 }
-.about_close:hover{
+.about_close:hover {
   cursor: pointer;
 }
 
