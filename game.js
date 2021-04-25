@@ -12,6 +12,7 @@ let monsters_position = [
 ];
 let start_interval;
 let empty_cells;
+let audio = new Audio("resources/music/background.mp3");
 
 $(document).ready(function () {
   $(".hidden_hearts").hide();
@@ -33,6 +34,7 @@ function StartNewGame() {
   start_time = new Date();
   start_interval = new Date();
   board = CreateBoardGame();
+  audio.play();
   //Start game
   interval = setInterval(UpdatePosition, 200);
 }
@@ -364,5 +366,7 @@ function reduceLife() {
 
 function stopGame(message) {
   window.clearInterval(interval);
+  audio.pause();
+  audio.currentTime = 0;
   window.alert(message);
 }

@@ -18,7 +18,9 @@
   </head>
 
   <body>
-    <div id="header"></div>
+    <div id="header">
+      <img class="photo" src="resources/images/logo.png" /><br />
+    </div>
     <div id="menu" style="text-align: center">
       <span id="nav-bar">
         <button
@@ -67,24 +69,42 @@
     </div>
     <div id="content">
       <div id="welcome" class="div-content">
-        <br /><img class="photo" src="resources/images/logo.png" /><br />
-        <div class='welcome-user'>
-          <p id="welcome-greeting">Welcome User!</p>
-          <br>
-          <p class="logged-button">You can start a new game with our default values,<br>
-          or you can go to properties to change the game prefences.</p>
-          <br>
-          <button class="logged-button div_but" onclick="show_only_button('properties')">
+        <br />
+        <div class="welcome-user">
+          <p id="welcome-greeting">
+            Hello User!<br />
+            Welcome to the PacMan Game. <br />
+            Please register or login to start playing.
+          </p>
+          <br />
+          <p class="logged-button">
+            You can start a new game with our default values,<br />
+            or you can go to properties to change the game prefences.
+          </p>
+          <br />
+          <button
+            class="logged-button div_but"
+            onclick="show_only_button('properties')"
+          >
             Properties
           </button>
-          <button class="logged-button div_but" onclick="show_only_button('all_game')">
+          <button
+            class="logged-button div_but"
+            onclick="show_only_button('all_game')"
+          >
             Game
           </button>
         </div>
-        <button class="welcome-button div_but" onclick="show_only_button('register')">
+        <button
+          class="welcome-button div_but"
+          onclick="show_only_button('register')"
+        >
           Register
         </button>
-        <button class="welcome-button div_but" onclick="show_only_button('login')">
+        <button
+          class="welcome-button div_but"
+          onclick="show_only_button('login')"
+        >
           Login
         </button>
       </div>
@@ -142,8 +162,10 @@
           />
           <br />
           <br />
-          <button id="reg-submit" class='div_but' onclick="return register()">Submit</button>
-          <input type="reset" class='div_but' value="Reset" />
+          <button id="reg-submit" class="div_but" onclick="return register()">
+            Submit
+          </button>
+          <input type="reset" class="div_but" value="Reset" />
         </form>
       </div>
       <div id="login" class="div-content">
@@ -167,8 +189,10 @@
             required
           />
           <br /><br />
-          <button id="login-submit" class='div_but' onclick="return login()">Login</button>
-          <input type="reset" class='div_but' value="Reset" />
+          <button id="login-submit" class="div_but" onclick="return login()">
+            Login
+          </button>
+          <input type="reset" class="div_but" value="Reset" />
         </form>
         <label id="logged_in">You Are Already Logged In.</label>
       </div>
@@ -220,7 +244,7 @@
                 id="prop-num-balls"
                 class="prop_button"
                 type="num_balls"
-                value=50
+                value="50"
                 placeholder="Balls"
                 name="num_balls"
               />
@@ -229,7 +253,7 @@
               <input
                 id="prop-num-monsters"
                 class="prop_button"
-                value=4
+                value="4"
                 type="num_monsters"
                 placeholder="Monsters"
                 name="num_monsters"
@@ -240,7 +264,7 @@
                 id="prop-time"
                 class="prop_button"
                 type="prop-time"
-                value=60
+                value="60"
                 placeholder="Seconds"
                 name="prop-time"
               />
@@ -251,7 +275,7 @@
             <br />
             <br />
             <div style="display: flex; justify-content: center">
-              <div style="width: 25%;margin-left: 5px;margin-right: 5px;">
+              <div style="width: 25%; margin-left: 5px; margin-right: 5px">
                 <label>5 Points Ball</label>
                 <br />
                 <input
@@ -259,11 +283,11 @@
                   id="color_ball_5"
                   onchange="clickColor(0, -1, -1, 5)"
                   value="#5F0F40"
-                  style="width: 40%;"
+                  style="width: 40%"
                 />
               </div>
 
-              <div style="width: 25%;margin-left: 5px;margin-right: 5px;">
+              <div style="width: 25%; margin-left: 5px; margin-right: 5px">
                 <label>15 Points Ball</label>
                 <br />
                 <input
@@ -271,10 +295,10 @@
                   id="color_ball_15"
                   onchange="clickColor(0, -1, -1, 5)"
                   value="#9A031E"
-                  style="width: 40%;"
+                  style="width: 40%"
                 />
               </div>
-              <div style="width: 25%;margin-left: 5px;margin-right: 5px;">
+              <div style="width: 25%; margin-left: 5px; margin-right: 5px">
                 <label>25 Points Ball</label>
                 <br />
                 <input
@@ -282,36 +306,46 @@
                   id="color_ball_25"
                   onchange="clickColor(0, -1, -1, 5)"
                   value="#0F4C5C"
-                  style="width: 40%;"
+                  style="width: 40%"
                 />
               </div>
             </div>
           </div>
           <br />
           <br />
-          <button id="prop-random" class='div_but' onclick="return rand_details()">
+          <button
+            id="prop-random"
+            class="div_but"
+            onclick="return rand_details()"
+          >
             Random
           </button>
-          <button id="prop-submit" class='div_but' onclick="return save_details()">Save</button>
-          <input type="reset" class='div_but' value="Reset" />
+          <button
+            id="prop-submit"
+            class="div_but"
+            onclick="return save_details()"
+          >
+            Save
+          </button>
+          <input type="reset" class="div_but" value="Reset" />
         </form>
       </div>
 
       <dialog id="about">
         <div class="div-about">
-          <span onclick=close_about() class="about_close">&times;</span>
-          <br>
+          <span onclick="close_about()" class="about_close">&times;</span>
+          <br />
           <label>:מגישים</label>
-          <br>
+          <br />
           <label>שקד אלמוג - 315505685</label>
-          <br>
+          <br />
           <label>מאור בובליל - 315601849</label>
         </div>
         <div class="blocker" onclick="close_about()"></div>
       </dialog>
-      <div id="all_game" class="div-content" style="width: 700px;">
-        <div id='logged-game'>
-          <span id='game-info'>
+      <div id="all_game" class="div-content" style="width: 700px">
+        <div id="logged-game">
+          <span id="game-info">
             <div id="score">
               <label for="lblScore">Score:</label>
               <input id="lblScore" type="text" />
@@ -322,30 +356,95 @@
             </div>
             <div id="lives">
               <label for="lblTime">Lives:</label>
-              <img id="heart_1" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-              <img id="heart_2" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-              <img id="heart_3" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-              <img id="heart_4" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-              <img id="heart_5" class='hearts' src="resources/images/heart.png" height="15" width="15" />
-              <img id="heart_6" class='hidden_hearts' src="resources/images/heart.png" height="15" width="15" />
-              <img id="heart_7" class='hidden_hearts' src="resources/images/heart.png" height="15" width="15" />
+              <img
+                id="heart_1"
+                class="hearts"
+                src="resources/images/heart.png"
+                height="15"
+                width="15"
+              />
+              <img
+                id="heart_2"
+                class="hearts"
+                src="resources/images/heart.png"
+                height="15"
+                width="15"
+              />
+              <img
+                id="heart_3"
+                class="hearts"
+                src="resources/images/heart.png"
+                height="15"
+                width="15"
+              />
+              <img
+                id="heart_4"
+                class="hearts"
+                src="resources/images/heart.png"
+                height="15"
+                width="15"
+              />
+              <img
+                id="heart_5"
+                class="hearts"
+                src="resources/images/heart.png"
+                height="15"
+                width="15"
+              />
+              <img
+                id="heart_6"
+                class="hidden_hearts"
+                src="resources/images/heart.png"
+                height="15"
+                width="15"
+              />
+              <img
+                id="heart_7"
+                class="hidden_hearts"
+                src="resources/images/heart.png"
+                height="15"
+                width="15"
+              />
             </div>
           </span>
-          
-            <div id="game">
-              <canvas id="canvas" height="500" width="680"></canvas>
-              <div id="game_details" style="margin-bottom: 10px;">
-                <label id='user-det' class='detail-label' style="font-size:medium;">XXX Is Playing.</label>
-                <br>
-                <label id='ball-det' class='detail-label'><b>Number of Balls:</b> 50</label>
-                <label id='mons-det' class='detail-label'><b>Number of Monsters:</b> 4</label>
-                <label id='time-det' class='detail-label'><b>Game Time:</b> 60</label>
-              </div>
-              <button onclick="StartNewGame()" class='div-button div_but' style='width: 150px;height: 40px;'>Start New Game</button>
-              <button onclick="stopGame('Game stopped')" class='div-button div_but' style='width: 150px;height: 40px;'>Stop Game</button>
+
+          <div id="game">
+            <canvas id="canvas" height="500" width="680"></canvas>
+            <div id="game_details" style="margin-bottom: 10px">
+              <label
+                id="user-det"
+                class="detail-label"
+                style="font-size: medium"
+                >XXX Is Playing.</label
+              >
+              <br />
+              <label id="ball-det" class="detail-label"
+                ><b>Number of Balls:</b> 50</label
+              >
+              <label id="mons-det" class="detail-label"
+                ><b>Number of Monsters:</b> 4</label
+              >
+              <label id="time-det" class="detail-label"
+                ><b>Game Time:</b> 60</label
+              >
             </div>
+            <button
+              onclick="StartNewGame()"
+              class="div-button div_but"
+              style="width: 150px; height: 40px"
+            >
+              Start New Game
+            </button>
+            <button
+              onclick="stopGame('Game stopped')"
+              class="div-button div_but"
+              style="width: 150px; height: 40px"
+            >
+              Stop Game
+            </button>
+          </div>
         </div>
-        <label id='game-connect'>You Must Login Before Playing.</label>
+        <label id="game-connect">You Must Login Before Playing.</label>
       </div>
     </div>
     <div id="footer"></div>
