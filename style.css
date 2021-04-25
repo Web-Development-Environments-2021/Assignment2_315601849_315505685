@@ -101,12 +101,14 @@ body {
   background-position: center;
   text-align: center;
 }
-
+#footer-wrap {
+  margin-top: 100px;
+}
 #footer {
   display: flex;
   justify-content: center;
   position: relative;
-  margin-top: 100px;
+  margin-top: 40px;
   bottom: 20px;
   left: 0;
   right: 0;
