@@ -34,7 +34,7 @@ function StartNewGame() {
   start_interval = new Date();
   board = CreateBoardGame();
   //Start game
-  interval = setInterval(UpdatePosition, 250);
+  interval = setInterval(UpdatePosition, 200);
 }
 
 function StartGame() {
@@ -249,17 +249,19 @@ function updateMonsterPosition() {
     }
     monster.x = move[0];
     monster.y = move[1];
-    monsters_array[mons_idx][0] = move[0];
-    monsters_array[mons_idx][1] = move[1];
   }
 }
 
 function UpdatePosition() {
   if (move_monsters == 0) {
     updateMonsterPosition();
-    move_monsters = 1;
+    move_monsters++;
   } else {
-    move_monsters = 0;
+    if (move_monsters == 3) {
+      move_monsters = 0;
+    } else {
+      move_monsters++;
+    }
   }
 
   let cur_x = pacman_obj.x;
@@ -307,17 +309,22 @@ function UpdatePosition() {
       }
     }
   }
+  for (let mons_idx = 0; mons_idx < monsters_array.length; mons_idx++) {
+    let curr_mons = monsters_array[mons_idx];
+    if (curr_mons.x == pacman_obj.x && curr_mons.y == pacman_obj.y) {
+      score -= curr_mons.life_to_reduce * 10;
+      for (var i = 0; i < curr_mons.life_to_reduce; i++) {
+        reduceLife();
+      }
+      if (life > 0) {
+        StartGame();
+      }
+      break;
+    }
+  }
 
   let cur_obj = board[pacman_obj.x][pacman_obj.y];
-  if (cur_obj != null && cur_obj.constructor.name == "Monster") {
-    score -= cur_obj.life_to_reduce * 10;
-    for (var i = 0; i < cur_obj.life_to_reduce; i++) {
-      reduceLife();
-    }
-    if (life > 0) {
-      StartGame();
-    }
-  } else {
+  if (!(cur_obj != null && cur_obj.constructor.name == "Monster")) {
     if (cur_obj != null && cur_obj.constructor.name == "Candy") {
       score += cur_obj.points;
       interval_score += cur_obj.points;
