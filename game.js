@@ -2,9 +2,9 @@ let pacman_obj;
 let monsters_array = new Array();
 let candies_count = 0;
 //let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
-let monsters_life = [2, 1, 1, 1];
+const monsters_life = [2, 1, 1, 1];
 let move_monsters = 0;
-let monsters_position = [
+const monsters_position = [
   [0, 0],
   [0, board_hight - 1],
   [board_width - 1, 0],
@@ -12,7 +12,7 @@ let monsters_position = [
 ];
 let start_interval;
 let empty_cells;
-let audio = new Audio("resources/music/background.mp3");
+const audio = new Audio("resources/music/background.mp3");
 
 $(document).ready(function () {
   $(".hidden_hearts").hide();
@@ -59,7 +59,7 @@ function setMonstersLocation() {
 
     monster.x = x;
     monster.y = y;
-    board[x][y] = monster;
+   // board[x][y] = monster;
   }
 }
 
@@ -96,7 +96,6 @@ function CreateBoardGame() {
     number_of_balls - (food_5_remain + food_15_remain + food_25_remain);
   food_5_remain += leftovers;
 
-  var pacman_remain = 1;
   board = create_board();
   empty_cells = new Array();
 
@@ -195,6 +194,14 @@ function Draw() {
       }
     }
   }
+
+  //draw monsters
+  let monster;
+  for (let mons_idx = 0; mons_idx < monsters_array.length; mons_idx++) {
+    monster = monsters_array[mons_idx];
+    monster.drawMe();
+  }
+
 }
 
 function GetKeyPressed() {
@@ -213,6 +220,9 @@ function GetKeyPressed() {
 }
 
 function updateMonsterPosition() {
+  let monster;
+  let possible_movement;
+
   for (let mons_idx = 0; mons_idx < monsters_array.length; mons_idx++) {
     monster = monsters_array[mons_idx];
     possible_movement = [
@@ -255,6 +265,8 @@ function updateMonsterPosition() {
 }
 
 function UpdatePosition() {
+
+  //Move monsters
   if (move_monsters == 0) {
     updateMonsterPosition();
     move_monsters++;
@@ -266,6 +278,7 @@ function UpdatePosition() {
     }
   }
 
+  //Move Pacman
   let cur_x = pacman_obj.x;
   let cur_y = pacman_obj.y;
   //clean pacman position
@@ -311,9 +324,13 @@ function UpdatePosition() {
       }
     }
   }
+
+  //Check monsters collision
+  let met_monster = false;
   for (let mons_idx = 0; mons_idx < monsters_array.length; mons_idx++) {
     let curr_mons = monsters_array[mons_idx];
     if (curr_mons.x == pacman_obj.x && curr_mons.y == pacman_obj.y) {
+      met_monster = true;
       score -= curr_mons.life_to_reduce * 10;
       for (var i = 0; i < curr_mons.life_to_reduce; i++) {
         reduceLife();
@@ -325,22 +342,25 @@ function UpdatePosition() {
     }
   }
 
-  let cur_obj = board[pacman_obj.x][pacman_obj.y];
-  if (!(cur_obj != null && cur_obj.constructor.name == "Monster")) {
-    if (cur_obj != null && cur_obj.constructor.name == "Candy") {
-      score += cur_obj.points;
-      interval_score += cur_obj.points;
-      candies_count--;
+  //check collisions 
+  if (!met_monster){
+    let cur_obj = board[pacman_obj.x][pacman_obj.y];
+    if (cur_obj != null){
+      if (cur_obj.constructor.name == "Candy") {
+        score += cur_obj.points;
+        interval_score += cur_obj.points;
+        candies_count--;
+      }
+      if (cur_obj.constructor.name == "Pill") {
+        life++;
+        $("#heart_" + life).show();
+      }
     }
-    if (cur_obj != null && cur_obj.constructor.name == "Pill") {
-      life++;
-      $("#heart_" + life).show();
-    }
-
     //Place Packman in new position in array
     board[pacman_obj.x][pacman_obj.y] = pacman_obj;
   }
 
+  //Set game properties
   var currentTime = new Date();
   total_time_elapsed = (currentTime - start_time) / 1000;
   time_elapsed = (currentTime - start_interval) / 1000;
