@@ -1,4 +1,6 @@
 let pacman_obj;
+let bonus_obj;
+let bonus_eaten = false;
 let monsters_array = new Array();
 let candies_count = 0;
 //let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
@@ -33,6 +35,7 @@ function StartNewGame() {
   pac_color = "yellow";
   start_time = new Date();
   start_interval = new Date();
+  bonus_eaten = false;
   board = CreateBoardGame();
   audio.play();
   //Start game
@@ -43,6 +46,7 @@ function StartGame() {
   pac_color = "yellow";
   setMonstersLocation();
   setPakmanLocation();
+  setBunusLocation();
   start_interval = new Date();
   interval_score = 0;
 }
@@ -101,6 +105,10 @@ function CreateBoardGame() {
   for (var i = 0; i < board_width; i++) {
     for (var j = 0; j < board_hight; j++) {
       if (board[i][j] == null){
+        if ( i == 8 && j == 6){
+          //bonus start location
+          continue;
+        }
         var randomNum = Math.random();
         if (randomNum <= (1.0 * food_5_remain) / cnt) {
           food_5_remain--;
@@ -142,6 +150,10 @@ function CreateBoardGame() {
   pacman_obj = new Pacman(null, null);
   setPakmanLocation();
 
+  //bonus
+  bonus_obj = new Bonus(null, null);
+  setBunusLocation();
+
   return board;
 }
 
@@ -157,6 +169,11 @@ function findRandomEmptyCell(board) {
   let position = empty_cells[indx];
   empty_cells.splice(indx, 1);
   return position;
+}
+
+function setBunusLocation(){
+  bonus_obj.x = 8;
+  bonus_obj.y = 6;
 }
 
 function getPoints() {
@@ -185,8 +202,10 @@ function Draw() {
     }
   }
 
-  //draw pacman
   pacman_obj.drawMe();
+  if (!bonus_eaten){
+    bonus_obj.drawMe();
+  }
 
   //draw monsters
   let monster;
@@ -334,6 +353,15 @@ function UpdatePosition() {
     }
   }
 
+  //check bonus collision
+  if (!bonus_eaten){
+    if (bonus_obj.x == pacman_obj.x && bonus_obj.y == pacman_obj.y) {
+      score += 50;
+      bonus_eaten = true;
+    }
+  }
+
+
   //check collisions 
   if (!met_monster){
     let cur_obj = board[pacman_obj.x][pacman_obj.y];
@@ -349,6 +377,7 @@ function UpdatePosition() {
       }
       //clean pacman position
       board[pacman_obj.x][pacman_obj.y] = null;
+      empty_cells.push([cur_x, cur_y]);
     }
   }
 
@@ -365,7 +394,7 @@ function UpdatePosition() {
   if (candies_count == 0) {
     stopGame("Game completed");
   }
-  
+
   Draw();
 }
 
