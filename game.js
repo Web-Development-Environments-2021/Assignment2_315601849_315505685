@@ -59,22 +59,13 @@ function setMonstersLocation() {
 
     monster.x = x;
     monster.y = y;
-   // board[x][y] = monster;
   }
 }
 
 function setPakmanLocation() {
-  //clean current pacman position
-  if (pacman_obj.x != null && pacman_obj.y != null) {
-    board[pacman_obj.x][pacman_obj.y] = null;
-  }
-
   let emptyCell = findRandomEmptyCell(board);
-  let i = emptyCell[0];
-  let j = emptyCell[1];
-  pacman_obj.x = i;
-  pacman_obj.y = j;
-  board[i][j] = pacman_obj;
+  pacman_obj.x = emptyCell[0];
+  pacman_obj.y = emptyCell[1];
 }
 
 function placePill() {
@@ -106,27 +97,22 @@ function CreateBoardGame() {
   }
   setMonstersLocation();
 
+  //place candies
   for (var i = 0; i < board_width; i++) {
     for (var j = 0; j < board_hight; j++) {
-      var randomNum = Math.random();
-      if (board[i][j] == null) {
-        //Candy
+      if (board[i][j] == null){
+        var randomNum = Math.random();
         if (randomNum <= (1.0 * food_5_remain) / cnt) {
           food_5_remain--;
           board[i][j] = new Candy(i, j, 5);
           candies_count++;
-        } else {
-          empty_cells.push([i, j]);
+        } else if (! (i in [0, board_width-1] && j in [0, board_hight-1])){
+            empty_cells.push([i, j]);
         }
-
         cnt--;
       }
     }
   }
-
-  //pacman
-  pacman_obj = new Pacman(null, null);
-  setPakmanLocation();
 
   //pills
   for (let i = 0; i < number_of_pills; i++) {
@@ -151,6 +137,10 @@ function CreateBoardGame() {
     food_25_remain--;
     candies_count++;
   }
+
+  //pacman
+  pacman_obj = new Pacman(null, null);
+  setPakmanLocation();
 
   return board;
 }
@@ -194,6 +184,9 @@ function Draw() {
       }
     }
   }
+
+  //draw pacman
+  pacman_obj.drawMe();
 
   //draw monsters
   let monster;
@@ -242,6 +235,7 @@ function updateMonsterPosition() {
         curr_move[0] > 16 ||
         curr_move[1] > 11
       ) {
+        //out of the board
         continue;
       }
       if (!(board[curr_move[0]][curr_move[1]] instanceof Wall)) {
@@ -281,10 +275,8 @@ function UpdatePosition() {
   //Move Pacman
   let cur_x = pacman_obj.x;
   let cur_y = pacman_obj.y;
-  //clean pacman position
-  board[cur_x][cur_y] = null;
-
   let key = GetKeyPressed();
+
   if (key == "UP") {
     pacman_obj.angle = 1.5;
     if (cur_y > 0) {
@@ -355,9 +347,9 @@ function UpdatePosition() {
         life++;
         $("#heart_" + life).show();
       }
+      //clean pacman position
+      board[pacman_obj.x][pacman_obj.y] = null;
     }
-    //Place Packman in new position in array
-    board[pacman_obj.x][pacman_obj.y] = pacman_obj;
   }
 
   //Set game properties
@@ -373,6 +365,7 @@ function UpdatePosition() {
   if (candies_count == 0) {
     stopGame("Game completed");
   }
+  
   Draw();
 }
 
