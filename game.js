@@ -269,6 +269,7 @@ function updateMonsterPosition() {
         //out of the board
         continue;
       }
+      //Manhattan Distance
       if (!(board[curr_move[0]][curr_move[1]] instanceof Wall)) {
         poss_move_arr.push(curr_move);
         if (
@@ -345,6 +346,7 @@ function updateBonus() {
       //out of the board
       continue;
     }
+    //Manhattan Distance
     if (!(board[curr_move[0]][curr_move[1]] instanceof Wall)) {
       if (
         Math.sqrt(
