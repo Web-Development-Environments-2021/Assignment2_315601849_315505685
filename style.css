@@ -3,6 +3,10 @@ body {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+#about{
+  direction: rtl;
+}
+
 .div-content {
   display: none;
   text-align: center;
