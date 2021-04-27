@@ -5,7 +5,11 @@ function register() {
   let username = $("#username-reg").val();
   if (userExist(username) || username.length == 0) {
     setError("#username-reg");
-    error += "Please choose a different username, this one is taken :)\n";
+    if (userExist(username)){
+      error += "Please choose a different username, this one is taken :)\n";
+    } else {
+      error += "Please insert a valid username\n";
+    }
     valid = false;
   } else {
     cleanError("#username-reg");
@@ -14,7 +18,7 @@ function register() {
   let password = $("#pass-reg").val();
   if (!validPass(password)) {
     setError("#pass-reg");
-    error += "Please choose a valid password.\n";
+    error += "Please choose a valid password - numbers and letters, at least 6 characters\n";
     valid = false;
   } else {
     cleanError("#pass-reg");
