@@ -171,6 +171,12 @@ function findRandomEmptyCell(board) {
   return position;
 }
 
+function findRandomEmptyCell_no_remove(board) {
+  let indx = Math.floor(Math.random() * empty_cells.length);
+  let position = empty_cells[indx];
+  return position;
+}
+
 function setBunusLocation() {
   bonus_obj.x = 8;
   bonus_obj.y = 6;
@@ -306,7 +312,62 @@ function updateMonsterPosition() {
   }
 }
 
+function updateBonus() {
+  if (
+    bonus_obj.x == bonus_obj.direction_x &&
+    bonus_obj.y == bonus_obj.direction_y
+  ) {
+    let bonus_new_pos = findRandomEmptyCell_no_remove();
+    bonus_obj.direction_x = bonus_new_pos[0];
+    bonus_obj.direction_y = bonus_new_pos[1];
+  }
+  possible_movement = [
+    [bonus_obj.x, bonus_obj.y],
+    [bonus_obj.x + 1, bonus_obj.y],
+    [bonus_obj.x, bonus_obj.y + 1],
+    [bonus_obj.x - 1, bonus_obj.y],
+    [bonus_obj.x, bonus_obj.y - 1],
+  ];
+  let move;
+  let closest = 1000;
+
+  for (let mov_idx = 0; mov_idx < possible_movement.length; mov_idx++) {
+    let curr_move = possible_movement[mov_idx];
+    if (
+      curr_move[0] < 0 ||
+      curr_move[1] < 0 ||
+      curr_move[0] > 16 ||
+      curr_move[1] > 11
+    ) {
+      //out of the board
+      continue;
+    }
+    if (!(board[curr_move[0]][curr_move[1]] instanceof Wall)) {
+      if (
+        Math.sqrt(
+          Math.pow(curr_move[0] - bonus_obj.direction_x, 2) +
+            Math.pow(curr_move[1] - bonus_obj.direction_y, 2)
+        ) < closest
+      ) {
+        move = curr_move;
+        closest = Math.sqrt(
+          Math.pow(curr_move[0] - bonus_obj.direction_x, 2) +
+            Math.pow(curr_move[1] - bonus_obj.direction_y, 2)
+        );
+      }
+    }
+  }
+  if (bonus_obj.x == move[0] && bonus_obj.y == move[1]) {
+    let bonus_new_pos = findRandomEmptyCell_no_remove();
+    bonus_obj.direction_x = bonus_new_pos[0];
+    bonus_obj.direction_y = bonus_new_pos[1];
+  }
+  bonus_obj.x = move[0];
+  bonus_obj.y = move[1];
+}
+
 function UpdatePosition() {
+  updateBonus();
   //Move monsters
   if (move_monsters == 0) {
     updateMonsterPosition();
