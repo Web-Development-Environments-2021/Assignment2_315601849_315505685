@@ -104,8 +104,8 @@ function CreateBoardGame() {
   //place candies
   for (var i = 0; i < board_width; i++) {
     for (var j = 0; j < board_hight; j++) {
-      if (board[i][j] == null){
-        if ( i == 8 && j == 6){
+      if (board[i][j] == null) {
+        if (i == 8 && j == 6) {
           //bonus start location
           continue;
         }
@@ -114,8 +114,8 @@ function CreateBoardGame() {
           food_5_remain--;
           board[i][j] = new Candy(i, j, 5);
           candies_count++;
-        } else if (! (i in [0, board_width-1] && j in [0, board_hight-1])){
-            empty_cells.push([i, j]);
+        } else if (!(i in [0, board_width - 1] && j in [0, board_hight - 1])) {
+          empty_cells.push([i, j]);
         }
         cnt--;
       }
@@ -171,7 +171,7 @@ function findRandomEmptyCell(board) {
   return position;
 }
 
-function setBunusLocation(){
+function setBunusLocation() {
   bonus_obj.x = 8;
   bonus_obj.y = 6;
 }
@@ -203,7 +203,7 @@ function Draw() {
   }
 
   pacman_obj.drawMe();
-  if (!bonus_eaten){
+  if (!bonus_eaten) {
     bonus_obj.drawMe();
   }
 
@@ -213,7 +213,6 @@ function Draw() {
     monster = monsters_array[mons_idx];
     monster.drawMe();
   }
-
 }
 
 function GetKeyPressed() {
@@ -246,6 +245,9 @@ function updateMonsterPosition() {
     ];
     let move;
     let closest = 1000;
+    let curr_mons_same_distance = Array();
+    let poss_move_arr = Array();
+
     for (let mov_idx = 0; mov_idx < possible_movement.length; mov_idx++) {
       let curr_move = possible_movement[mov_idx];
       if (
@@ -258,6 +260,15 @@ function updateMonsterPosition() {
         continue;
       }
       if (!(board[curr_move[0]][curr_move[1]] instanceof Wall)) {
+        poss_move_arr.push(curr_move);
+        if (
+          Math.sqrt(
+            Math.pow(curr_move[0] - pacman_obj.x, 2) +
+              Math.pow(curr_move[1] - pacman_obj.y, 2)
+          ) == closest
+        ) {
+          curr_mons_same_distance.push(curr_move);
+        }
         if (
           Math.sqrt(
             Math.pow(curr_move[0] - pacman_obj.x, 2) +
@@ -265,6 +276,8 @@ function updateMonsterPosition() {
           ) < closest
         ) {
           move = curr_move;
+          curr_mons_same_distance = Array();
+          curr_mons_same_distance.push(curr_move);
           closest = Math.sqrt(
             Math.pow(curr_move[0] - pacman_obj.x, 2) +
               Math.pow(curr_move[1] - pacman_obj.y, 2)
@@ -272,13 +285,28 @@ function updateMonsterPosition() {
         }
       }
     }
-    monster.x = move[0];
-    monster.y = move[1];
+    let random = Math.floor(Math.random() * curr_mons_same_distance.length);
+    console.log(curr_mons_same_distance[random]);
+    move = curr_mons_same_distance[random];
+    let move_on = false;
+    for (let mons_idx_2 = 0; mons_idx_2 < monsters_array.length; mons_idx_2++) {
+      if (
+        monsters_array[mons_idx_2].x == move[0] &&
+        monsters_array[mons_idx_2].y == move[1]
+      ) {
+        move_on = true;
+        break;
+      }
+    }
+    if (move_on) {
+      continue;
+    }
+    monster.x = curr_mons_same_distance[random][0];
+    monster.y = curr_mons_same_distance[random][1];
   }
 }
 
 function UpdatePosition() {
-
   //Move monsters
   if (move_monsters == 0) {
     updateMonsterPosition();
@@ -354,18 +382,17 @@ function UpdatePosition() {
   }
 
   //check bonus collision
-  if (!bonus_eaten){
+  if (!bonus_eaten) {
     if (bonus_obj.x == pacman_obj.x && bonus_obj.y == pacman_obj.y) {
       score += 50;
       bonus_eaten = true;
     }
   }
 
-
-  //check collisions 
-  if (!met_monster){
+  //check collisions
+  if (!met_monster) {
     let cur_obj = board[pacman_obj.x][pacman_obj.y];
-    if (cur_obj != null){
+    if (cur_obj != null) {
       if (cur_obj.constructor.name == "Candy") {
         score += cur_obj.points;
         interval_score += cur_obj.points;
