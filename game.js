@@ -489,7 +489,7 @@ function UpdatePosition() {
     pac_color = "#D17A22";
   }
   if (candies_count == 0) {
-    stopGame("Game completed");
+    stopGame("Game Completed - You Rule!!");
   }
 
   Draw();
@@ -511,7 +511,7 @@ function reduceLife() {
   $("#heart_" + life).hide();
   life--;
   if (life == 0) {
-    stopGame("Game Over");
+    stopGame("Loser!");
   }
 }
 
@@ -519,5 +519,16 @@ function stopGame(message) {
   window.clearInterval(interval);
   audio.pause();
   audio.currentTime = 0;
-  window.alert(message);
+  let message_about_game = message + "\n";
+  message_about_game += "You earned " + score + " points.\n";
+  if ( life > 0 ){ //not eaten by monsters
+    if(score < 100){
+      message_about_game += "You are better than " + score + " points!\n";
+    }
+    else{
+      message_about_game += "Winner!!!"
+    }
+  }
+
+  window.alert(message_about_game);
 }
