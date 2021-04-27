@@ -15,7 +15,7 @@ function login(){
         alert("User doesn't exist")
     }
     else if(users[username].password != password){
-        alert("User doesn't exist")
+        alert("Wrong Password")
     }
     else{
         welcomeUser(username);
