@@ -3,6 +3,7 @@ let bonus_obj;
 let bonus_eaten = false;
 let monsters_array = new Array();
 let candies_count = 0;
+let godmode = 0;
 //let monsters_colors = ["#F71735", "#011627", "#ABC8C0", "#337357"]
 const monsters_life = [2, 1, 1, 1];
 let move_monsters = 0;
@@ -167,6 +168,13 @@ function placeCandies(points) {
 function findRandomEmptyCell(board) {
   let indx = Math.floor(Math.random() * empty_cells.length);
   let position = empty_cells[indx];
+  while (
+    (position[0] == 0 || position[0] == 16) &&
+    (position[1] == 0 || position[0] == 11)
+  ) {
+    indx = Math.floor(Math.random() * empty_cells.length);
+    position = empty_cells[indx];
+  }
   empty_cells.splice(indx, 1);
   return position;
 }
@@ -292,7 +300,6 @@ function updateMonsterPosition() {
       }
     }
     let random = Math.floor(Math.random() * curr_mons_same_distance.length);
-    console.log(curr_mons_same_distance[random]);
     move = curr_mons_same_distance[random];
     let move_on = false;
     for (let mons_idx_2 = 0; mons_idx_2 < monsters_array.length; mons_idx_2++) {
@@ -430,15 +437,18 @@ function UpdatePosition() {
   for (let mons_idx = 0; mons_idx < monsters_array.length; mons_idx++) {
     let curr_mons = monsters_array[mons_idx];
     if (curr_mons.x == pacman_obj.x && curr_mons.y == pacman_obj.y) {
-      met_monster = true;
-      score -= curr_mons.life_to_reduce * 10;
-      for (var i = 0; i < curr_mons.life_to_reduce; i++) {
-        reduceLife();
+      if (godmode == 0) {
+        met_monster = true;
+        score -= curr_mons.life_to_reduce * 10;
+        for (var i = 0; i < curr_mons.life_to_reduce; i++) {
+          reduceLife();
+        }
+
+        if (life > 0) {
+          StartGame();
+        }
+        break;
       }
-      if (life > 0) {
-        StartGame();
-      }
-      break;
     }
   }
 
