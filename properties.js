@@ -29,6 +29,20 @@ function set_default_properties() {
   num_of_monsters = 4;
 }
 
+function reset_info() {
+  left_key = 37;
+  right_key = 39;
+  up_key = 38;
+  down_key = 40;
+  $("#color_ball_5").val("#5F0F40");
+  $("#color_ball_15").val("#9A031E");
+  $("#color_ball_25").val("#0F4C5C");
+  $("#prop-num-balls").val(50);
+  $("#prop-num-monsters").val(4);
+  $("#prop-time").val(60);
+  return false;
+}
+
 async function show_rec_dialog(key) {
   $(".modal").show();
   last_pressed = key;
