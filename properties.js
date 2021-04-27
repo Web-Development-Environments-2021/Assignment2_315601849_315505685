@@ -60,6 +60,10 @@ function waitingKeypress(key) {
 }
 
 function rand_details() {
+  left_key = 37;
+  right_key = 39;
+  up_key = 38;
+  down_key = 40;
   $("#prop-num-balls").val(Math.floor(Math.random() * (90 - 50 + 1) + 50));
   $("#prop-num-monsters").val(Math.floor(Math.random() * (4 - 1 + 1) + 1));
   $("#prop-time").val(Math.floor(Math.random() * (120 - 60 + 1) + 60));
