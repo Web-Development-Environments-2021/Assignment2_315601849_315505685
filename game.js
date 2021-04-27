@@ -55,10 +55,6 @@ function StartGame() {
 function setMonstersLocation() {
   for (let i = 0; i < monsters_array.length; i++) {
     monster = monsters_array[i];
-    if (monster.x != null && monster.y != null) {
-      board[monster.x][monster.y] = null;
-    }
-
     let x = monsters_position[i][0];
     let y = monsters_position[i][1];
 
@@ -374,6 +370,7 @@ function updateBonus() {
 }
 
 function UpdatePosition() {
+  countcandies();
   updateBonus();
   //Move monsters
   if (move_monsters == 0) {
@@ -494,6 +491,18 @@ function UpdatePosition() {
   }
 
   Draw();
+}
+
+function countcandies() {
+  let count = 0;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] instanceof Candy) {
+        count++;
+      }
+    }
+  }
+  return count;
 }
 
 function reduceLife() {
