@@ -193,6 +193,7 @@ function getPoints() {
 
 function Draw() {
   canvas.width = canvas.width; //clean board
+
   lblScore.value = score;
   lblTime.value = total_time_elapsed;
 
@@ -483,7 +484,8 @@ function UpdatePosition() {
   total_time_elapsed = (currentTime - start_time) / 1000;
   time_elapsed = (currentTime - start_interval) / 1000;
   if (total_time_elapsed >= game_time) {
-    stopGame("Game Over");
+    total_time_elapsed = game_time;
+    stopGame("Time is up");
   }
   if (interval_score >= 100 && time_elapsed <= 10) {
     pac_color = "#D17A22";
