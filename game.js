@@ -436,7 +436,7 @@ function UpdatePosition() {
   for (let mons_idx = 0; mons_idx < monsters_array.length; mons_idx++) {
     let curr_mons = monsters_array[mons_idx];
     if (curr_mons.x == pacman_obj.x && curr_mons.y == pacman_obj.y) {
-      if (godmode == 0) {
+      if (godmode == 0) { // not in cheat mode
         met_monster = true;
         score -= curr_mons.life_to_reduce * 10;
         for (var i = 0; i < curr_mons.life_to_reduce; i++) {
@@ -495,7 +495,26 @@ function UpdatePosition() {
   Draw();
 }
 
+function stopGame(message) {
+  window.clearInterval(interval);
+  audio.pause();
+  audio.currentTime = 0;
+  let message_about_game = message + "\n";
+  message_about_game += "You earned " + score + " points.\n";
+  if ( life > 0 ){ //not eaten by monsters
+    if(score < 100){
+      message_about_game += "You are better than " + score + " points!\n";
+    }
+    else{ //at least 100 points
+      message_about_game += "Winner!!!"
+    }
+  }
+
+  window.alert(message_about_game);
+}
+
 function countcandies() {
+  //for debug
   let count = 0;
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
@@ -515,20 +534,4 @@ function reduceLife() {
   }
 }
 
-function stopGame(message) {
-  window.clearInterval(interval);
-  audio.pause();
-  audio.currentTime = 0;
-  let message_about_game = message + "\n";
-  message_about_game += "You earned " + score + " points.\n";
-  if ( life > 0 ){ //not eaten by monsters
-    if(score < 100){
-      message_about_game += "You are better than " + score + " points!\n";
-    }
-    else{
-      message_about_game += "Winner!!!"
-    }
-  }
 
-  window.alert(message_about_game);
-}
